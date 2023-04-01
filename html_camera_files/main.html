@@ -1,0 +1,3486 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="m.css" rel="stylesheet" type="text/css" media="screen">
+    
+    <title>NETSurveillance WEB</title>
+    
+    <!-- m.js -->
+
+    <script language="JavaScript" type="text/javascript">
+     var bCrossBrow=false;
+	 var bnpCheck = false;
+var showemailflag=3;
+var ShowTipFlag=1;
+	 //wzy 20190904
+     var g_initWidth = document.documentElement.clientWidth;
+	
+	// var SupportFind=false;
+	    
+	if(navigator.platform != "Win32")//
+	{
+	}
+	var userAgent = navigator.userAgent,   
+			rMsie = /(msie\s|trident.*rv:)([\w.]+)/,   
+			rFirefox = /(firefox)\/([\w.]+)/,   
+			rOpera = /(opera).+version\/([\w.]+)/,   
+			rChrome = /(chrome)\/([\w.]+)/,   
+			rSafari = /version\/([\w.]+).*(safari)/;
+	var browserMatch = uaMatch(userAgent.toLowerCase());
+	 
+	if(browserMatch.browser!="IE")
+	{
+		 bCrossBrow=true;
+		  var userla=navigator.browserLanguage;
+		  switch (browserMatch.browser)
+		{
+			case "firefox":
+				if (compareBrowser(browserMatch.version,"52.0")){
+					if(userla=="zh-cn"){
+						alert("您的浏览器太新了,某些功能将不能正常使用,请下载51.0或以前的版本。");
+					}else{
+						alert("Your browser is too new,Some features will not work properly.Please download 51.0 or earlier.");
+					}
+				}
+				break;
+			case "opera":
+				if (compareBrowser(browserMatch.version,"34.0")){
+					 if(userla=="zh-cn"){
+						alert("您的浏览器太新了，请下载33.0或以前的版本。");
+					}else{
+						alert("Your browser is too new,Some features will not work properly.Please download 33.0 or earlier.");
+					}
+				}
+				break;
+			case "chrome":
+				if (compareBrowser(browserMatch.version,"45.0")){
+					 if(userla=="zh-cn"){
+						alert("您的浏览器太新了，请下载44.0或以前的版本。");
+					}else{
+						alert("Your browser is too new,Some features will not work properly.Please download 44.0 or earlier.");
+					}
+				}
+				break;
+			case "safari":
+				if (compareBrowser(browserMatch.version,"10.0")){
+					 if(userla=="zh-cn"){
+						alert("您的浏览器太新了，请下载9.0或以前的版本。");
+					}else{
+						alert("Your browser is too new,Some features will not work properly.Please download 9.0 or earlier.");
+					}
+				}
+				break;
+		}
+	}
+	
+	function compareBrowser(ver1,ver2) {  
+      var version1pre = parseFloat(ver1);  
+      var version2pre = parseFloat(ver2);  
+      var version1next =  ver1.replace(version1pre + ".","");  
+      var version2next =  ver2.replace(version2pre + ".","");  
+      if(version1pre > version2pre){  
+          return true;  
+      }else if(version1pre < version2pre){  
+      return false;  
+      }else{  
+          if(version1next > version2next){  
+            return true;  
+          }else{  
+            return false;  
+           }  
+        }  
+	}
+	
+	//对比版本是否有更新
+	function cmpVersion(ver1, ver2) {
+		//将版本号分为一个字符数组
+		var arrVer1 = ver1.split("=")[1].split(",");
+		var arrVer2 = ver2.split("=")[1].split(",");
+		for (var i = 0; i < arrVer1.length; ++i) {
+			var v1 = arrVer1[i];
+			var v2 = arrVer2[i];
+			if (v1 == null || v2 == null) {
+				break;
+			}
+			if (parseInt(v1) < parseInt(v2)) {
+				return true;
+				break;
+			}
+		}
+		 return false;
+	}
+	
+	
+	function reminder()
+	{
+		var isExistOcxFunction = true;
+		if ( 3 == showemailflag)
+		{
+			try {
+				ocx.RetrievePassWord(ipaddress, hostport);
+			} 
+			catch (e)
+			{
+				isExistOcxFunction = false;
+			}
+		}
+		if (!isExistOcxFunction || showemailflag != 3)
+		{
+			var nSel=$('langlist').selectedIndex;
+			var cLanguage;
+			switch(nSel)
+		{
+		case 0:
+             cLanguage="English";
+            
+             break;
+		case 1:
+             cLanguage="French";
+            
+             break;
+		case 2:
+             cLanguage="Hungarian";
+            
+             break;
+		case 3:
+             cLanguage="Italian";
+            
+             break;
+		case 4:
+             cLanguage="Japanese";
+             
+             break;
+		case 5:
+             cLanguage="Portugal";
+            
+             break;
+		case 6:
+             cLanguage="Russian";
+             
+             break;
+		case 7:
+             cLanguage="SimpChinese";
+            
+             break;
+		case 8:
+             cLanguage="Spanish";
+            
+             break;
+		case 9:
+             cLanguage="TradChinese";
+             
+             break;
+		case 10:
+             cLanguage="German";
+            
+             break;
+		case 11:
+             cLanguage="Poland";
+            
+             break;
+		case 12:
+             cLanguage="Turkey";
+           
+             break;
+		case 13:
+             cLanguage="Romanian";
+             break;
+		case 14:
+             cLanguage="Suomi";
+             break;
+		case 15:
+             cLanguage="Korean";
+             break;
+		case 16:
+             cLanguage="Farsi";
+             break;
+		case 17:
+             cLanguage="Thai";
+             break;
+		case 18:
+             cLanguage="Greek";
+             break;
+		case 19:
+             cLanguage="Vietnamese";
+             break;
+		case 20:
+             cLanguage="Brazilian";
+             break;
+		case 21:
+             cLanguage="Hebrew";
+             break;
+		case 22:
+             cLanguage="Arabic";  
+             break;  
+		case 23:
+             cLanguage="Bulgarian";  
+             break; 
+		case 24:
+      		 cLanguage="Czech";  
+             break;
+		case 25:
+			cLanguage="Azerbaycan";
+			break;
+		default:
+             cLanguage="English";
+             break;   
+		}			 
+		
+		if(2==ShowTipFlag)
+		{
+			switch(nSel)
+			{
+				case 0:
+					cLanguage="English";
+					alert("Please set the encrypted problem!");
+					break;
+				case 7:
+					cLanguage="SimpChinese";
+					alert("请先设置密保问题!");   
+					break;  
+				default:
+					cLanguage="English";
+					alert("Please set the encrypted problem!");
+					break;       
+			}
+		}
+		else
+		{
+			location="reminder.html?cLanguage="+cLanguage;
+		}
+		}
+	}
+	
+	function uaMatch(ua) {  
+                    var match = rMsie.exec(ua);
+		      
+                    if (match != null) {  
+                        return { browser : "IE", version : match[2] || "0" };  
+                   }  
+                    var match = rFirefox.exec(ua);  
+                   if (match != null) {  
+                       return { browser : match[1] || "", version : match[2] || "0" };  
+                    }  
+                    var match = rOpera.exec(ua);  
+                    if (match != null) {  
+                       return { browser : match[1] || "", version : match[2] || "0" };  
+                    }  
+                   var match = rChrome.exec(ua);  
+                   if (match != null) {  
+                       return { browser : match[1] || "", version : match[2] || "0" };  
+                   }  
+                    var match = rSafari.exec(ua);  
+                    if (match != null) {  
+                       return { browser : match[2] || "", version : match[1] || "0" };  
+                    }  
+                  if (match != null) {  
+                        return { browser : "", version : "0" };  
+                   }  
+               }  
+    </script>
+
+    <script type="text/javascript">//m.js
+     var ipaddress =document.location.hostname;
+if (ipaddress == "")
+{
+	//ipaddress = "10.10.89.143";
+
+
+}	
+var hostport=34567;
+var iLanguage=104;
+	var numLanguage;
+	var DownLoadAddr="";
+	</script>
+	<script src="m.jsp" type="text/javascript"></script>
+	<script src="config.js" type="text/javascript"></script>
+
+    <!-- 全局变量 -->
+
+    <script type="text/javascript">
+var gExitChannel=new Array();
+var gExitSubType=new Array();
+var gexiti;
+var gcid=-1;
+var g_channelNum=4;
+var g_digitalChannel=0;
+var gsld;
+var gslda;
+var gsldb;
+var gsldc;
+var gsldd;
+var gslde;
+var gsldf;
+var gfmu1=0;
+var gfmu2=0;
+var gfmu3=0;
+var g_bRecord=false;
+var g_bRealPlay=false;
+var g_bAudio=false;
+var bShowQS=false;
+var g_bQS=false;
+var g_bSubQS1=true;
+var g_bSubQS2=true;
+var g_bSubQS3=true;
+var g_bSubQS4=false;
+var g_strSubQS4Name = '';
+var g_bClose=false;
+var gHashCookie = new Hash.Cookie('NetSuveillanceWebCookie',{duration: 30});
+var settings = {
+            username: '',
+            ocxlanguage: '',
+            passwordMsg: 0,
+            NeedUpgrade : false,		//是否需要升级
+            Upgraded : false,			//是否走过升级流程
+            cabversion : null			//config.js版本号
+        }
+var gca=0;
+var gcb=0;
+var gcc=0;
+var gcd=0;
+var gce=0;
+var gcf=0;
+var gAutoPlayAll=false;
+var SupportActivePSWReset = 0;
+   
+
+    </script>
+
+    <!-- 颜色滑块 -->
+
+    <script type="text/javascript">
+function sldtopos(sld,step){
+	sld.knob.setStyle('left', sld.toPosition(step));
+}
+function setcolorsv(f,v){
+		switch (f)
+		{
+			case 1: gca=v;
+					$('ska').title=v;
+					break;
+			case 2: gcb=v;
+					$('skb').title=v;
+					break;
+			case 3: gcc=v;
+					$('skc').title=v;
+					break;
+			case 4: gcd=v;
+					$('skd').title=v;
+					break;
+		}	
+}
+function setaudiov(v){
+   gce=v;
+   $('ske').title=v;
+}
+function setaudioInv(v){
+	gcf=v;
+	$('skf').title=v;
+}
+function getcolors(){
+	var colors="";
+	colors=ocx.GetColor();
+	
+	var t= new Array();
+	if (colors !="")
+	{
+		t=colors.split(',');
+	sldtopos(gslda,parseInt(t[0]));
+	sldtopos(gsldb,parseInt(t[1]));
+	sldtopos(gsldc,parseInt(t[2]));
+	sldtopos(gsldd,parseInt(t[3]));
+	setcolorsv(1,parseInt(t[0]));
+	setcolorsv(2,parseInt(t[1]));
+	setcolorsv(3,parseInt(t[2]));
+	setcolorsv(4,parseInt(t[3]));
+	}
+	else//这里有待选中消息的传递
+	{
+	    
+	    sldtopos(gslda,parseInt(0));
+	sldtopos(gsldb,parseInt(0));
+	sldtopos(gsldc,parseInt(0));
+	sldtopos(gsldd,parseInt(0));
+	setcolorsv(1,parseInt(0));
+	setcolorsv(2,parseInt(0));
+	setcolorsv(3,parseInt(0));
+	setcolorsv(4,parseInt(0));	
+	}
+	
+
+}
+function getAudio(){
+    var audio = ocx.SetSpecialParamEx(10001, 0, 0, 0);
+	if(audio >= 100 && audio <= 200){
+	    sldtopos(gslde,audio-100);
+	    setaudiov(audio-100);
+	}else{
+	    $('Volume').style.display="none";
+	}
+}
+function getAudioIn(){
+    var audio = ocx.SetSpecialParamEx(10003, 0, 0, 0);
+	if(audio >= 100 && audio <= 200){
+	    sldtopos(gsldf,audio-100);
+	    setaudioInv(audio-100);
+	}else{
+	    $('VolumeIn').style.display="none";
+	}
+}
+function txreset(step){
+	setcolorsv(1,step);
+	setcolorsv(2,step);
+	setcolorsv(3,step);
+	setcolorsv(4,step);
+	sldtopos(gslda,step);
+	sldtopos(gsldb,step);
+	sldtopos(gsldc,step);
+	sldtopos(gsldd,step);
+	setcolors();
+}
+function audioset(step){
+    sldtopos(gslde,step);
+}
+function setcolors(){
+	ocx.SetColor(0,gca,gcb,gcc,gcd);
+}
+function setaudio(){
+    ocx.SetSpecialParamEx(10002, 0, gce, 0);
+}
+function setaudioIn(){
+    ocx.SetSpecialParamEx(10004, 0, gcf, 0);
+}
+    </script>
+
+    <!-- 设备通道  -->
+
+    <script type="text/javascript">
+    function tl(s){
+	var ret;
+	ret=ocx.Translate(s);
+	return ret;
+}//moving here for later function 
+function ca(o,ch)
+{
+var oc;
+	if ($(o).hasClass('cl1')){
+		if (ocx.StartRealPlay(ch,0,0)){
+		    oc=$('c'+ch);
+		    oc.removeClass(oc.className);
+			oc.addClass('cl2');   
+		}
+	}
+	else{
+		if (ocx.StopPlayReal(ch)){
+		   oc=$('c'+ch);
+		    oc.removeClass(oc.className);
+			oc.addClass('cl1');
+		}
+	}
+	getcolors();
+}
+
+function getcl(){	
+    g_digitalChannel=ocx.GetDeviceState(1,0);
+	var t= new Array();
+	var ts=new Array();
+	var titles=new Array();
+		titles[0]=tl('Desktop.LocalRecord');
+		titles[1]=tl('Desktop.ExtStream');
+		titles[2]=tl('Desktop.MainStream');
+		titles[3]=tl('Desktop.StartTalk');
+		titles[4]=tl('WebTitle.DigitalChannel');
+		titles[5]=tl('WebTitle.TalkIpcAllOn');
+	var shtml="";
+
+	shtml+="<li id='Talk' ><a title='"+titles[5]+"' id='talkingToIpcAll' class='talkIpcAllON' href='javascript:;'  onclick='OntalkIpc(-1)' style='display:none'></a><a title='"+titles[3]+"' id='talking' class='noT' href='javascript:;'  onclick='Ontalk()' ></a><span id='logoString' style='margin:0 5px 0 3px;'>NetSurveillance</span></li> "
+	var strsplita=String.fromCharCode(16);
+	var strsplitb=String.fromCharCode(9);
+	var sc;
+	sc=ocx.GetChannelName();	
+	if (sc !=""){
+		sc=sc.substr(0, sc.length-1);
+		t=sc.split(strsplita);
+		g_channelNum=t.length;
+		
+		var htmlReg = /<(\w+)>/;
+		for (var i =0; i<t.length;i++ ){
+			ts=t[i].split(strsplitb);
+			ts[1].replace(htmlReg, "&lt;$1&gt;");  //替换html字符
+
+			shtml+="<li >" +
+						"<a title='"+titles[3]+"' id='talking"+ts[0]+"' class='noTIPC' href='javascript:;' onclick='OntalkIpc("+ts[0]+")' style='display:none'></a>" +
+						"<a title='"+titles[0]+"' style='width:19px;margin:0,0,0,0px;outline:none;' id='re"+ts[0]+"' class='noRecord' href='javascript:;' onclick='record(this,"+ts[0]+")'></a>" +
+						"<a title='"+titles[1]+"' style='width:19px;margin:0,0,0,0px;outline:none;' id='subPlay"+ts[0]+"' class='noSubPlay' href='javascript:;' onclick='subPlay(this,"+ts[0]+")'></a>" +
+						"<a title='"+titles[2]+"' id='c"+ts[0]+"' class='cl1' onclick='ca(this,"+ts[0]+")'></a>" +
+						"<span id='name"+ts[0]+"' style='position:absolute;white-space :nowrap;margin:3px 0 0 0;'>"+ts[1]+"</span>" +
+					"</li>"
+		}
+		$("cl").innerHTML=shtml;
+		var ls = $$('#cl li');
+	}
+    //m_ocx.ChangeShowWndNum();
+	showExit();
+	showSelectNumb();
+	$('logoString').setText(logoString);//
+}
+function showSelectNumb() {
+           
+            switch(g_channelNum)
+            {
+         
+                case 1:
+                {
+                    $('xp2').style.display="none" ;
+                    $('xp3').style.display="none" ;
+                    $('xp4').style.display="none" ;
+                    $('xp5').style.display="none" ;
+                    $('xp6').style.display="none" ; 
+                    $('xp7').style.display="none" ;                                      
+                    break;                
+                }
+                case 2:
+                case 3:
+                case 4:
+                {
+					$('xp2').style.display="" ;
+                    $('xp3').style.display="none" ;
+                    $('xp4').style.display="none" ;
+                    $('xp5').style.display="none" ;
+                    $('xp6').style.display="none" ; 
+                    $('xp7').style.display="none" ;     
+                    break;                
+                }
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                {
+					$('xp2').style.display="" ;
+                    $('xp3').style.display="" ;
+                    $('xp4').style.display="none" ;
+                    $('xp5').style.display="none" ;
+                    $('xp6').style.display="none" ;
+                    $('xp7').style.display="none" ;      
+                    break;                
+                }                
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                case 16:
+                {
+					$('xp2').style.display="" ;
+                    $('xp3').style.display="" ;
+                    $('xp4').style.display="" ;
+                    $('xp5').style.display="none" ;
+                    $('xp6').style.display="none" ;
+                    $('xp7').style.display="none" ;      
+                    break;                
+                }
+                case 17:
+                case 18:
+                case 19:
+                case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                case 25:
+                {
+					$('xp2').style.display="" ;
+                    $('xp3').style.display="" ;
+                    $('xp4').style.display="" ;
+                    $('xp5').style.display="" ;
+                    $('xp6').style.display="none" ;   
+                    $('xp7').style.display="none" ;   
+                    break;                
+                }
+                case 26:
+                case 27:
+                case 28:
+                case 29:
+                case 30:
+                case 31:
+                case 32:
+                {
+					$('xp2').style.display="" ;
+                    $('xp3').style.display="" ;
+                    $('xp4').style.display="" ;
+                    $('xp5').style.display="" ;
+                    $('xp6').style.display="" ;
+                    $('xp7').style.display="none" ; 
+                    break;                
+                }
+                default: break;
+            }    
+}
+function showExit() {
+
+
+	  for(var j=1;j<gexiti+1;j++)
+        {     
+            if(gExitSubType[j]==true)
+            {
+            
+                    var temp="subPlay"+gExitChannel[j].toString();       
+                    $(temp).removeClass($(temp).className);
+                    $(temp).addClass('subPlay');            
+            }
+            else
+            {
+        
+                var temp="c"+gExitChannel[j].toString();       
+                $(temp).removeClass($(temp).className);
+                $(temp).addClass('cl2');
+            
+            }
+           
+        }
+        gexiti=0;
+}
+
+
+    </script>
+
+    <!-- 调整页面大小（待处理） -->
+
+    <script type="text/javascript">
+function resizeL(){
+                    
+                   $('username').setStyle('width',InputName.width);
+                   $('username').setStyle('line-height',InputName.height);                   
+                   $('password').setStyle('line-height',InputName.height);   
+                   $('username').setStyle('height',InputName.height);	
+                   $('username').setStyle('margin-top',InputName.marginTop);	                                      
+                   $('username').setStyle('margin-right',InputName.marginRight);
+                   $('userNameInput').setStyle('margin-top',SpanLoginName.marginTop);		
+                   $('password').setStyle('width',InputPassword.width);
+                   $('password').setStyle('height',InputPassword.height);
+                   $('password').setStyle('margin-top',InputPassword.marginTop);
+				   if(0==ShowTipFlag)
+				   {
+						$('reminder').style.display="none" ;
+						$('password').setStyle('margin-right',InputPassword.marginRight); 
+				   }
+				   else 
+				   {
+						$('reminder').style.display="" ;
+						$('password').setStyle('margin-right',10);	
+				   }  
+                   
+                   $('loginBT').setStyle('width',LoginButton.width);
+                   $('loginBT').setStyle('height',LoginButton.height);	
+                   
+                   	    
+                   if(1==LogoNumbers)
+                   {
+                       $("logo1").setStyle('background','none');
+                   }  
+
+
+
+                                         
+	                wwidth =document.documentElement.clientWidth;
+	                
+	                wheight=document.documentElement.clientHeight;
+	                
+	                $('login').setStyle('width',wwidth);
+	                
+	               $('lm').setStyle('width',wwidth);
+	               
+                           
+	                if(wwidth<=417)
+	                {
+	                    $('lmll').style.width=0;
+	                    $('lmrr').style.width=0;
+	                    $('lml').style.width=0;
+	                    $('lmr').style.widht=0;
+	                    $('lmm').setStyle('width',wwidth);
+	                    
+	                    $('ldl').setStyle('width',0)
+	                    $('ldm').setStyle('width',wwidth);
+	                    $('ldr').setStyle('width',0)
+	                }
+	                else if(wwidth<=1127)
+	               {
+	                    $('lmll').style.width=0;
+	                    $('lmrr').style.width=0;	  	                  
+	                    $('lml').setStyle('width',(wwidth-417)/2+(355-(wwidth-417)/2));
+	                    $('lml').setStyle('margin-left',-(355-(wwidth-417)/2));
+	                    $('lmr').setStyle('width',(wwidth-417)/2);
+	                    $('lmm').setStyle('width',417);
+	                    
+	                    $('ldl').setStyle('width',((wwidth-417)/2)-1)
+	                    $('ldm').setStyle('width',417);
+	                    $('ldr').setStyle('width',(wwidth-(417+(wwidth-417)/2-1)));
+	                    
+	                    
+	                    
+	                
+	                }
+	                else
+	                {	     
+                       
+                       $('lml').setStyle('margin-left',0);
+                                            
+                       $('lml').setStyle('width',355);                       
+                       $('lmr').setStyle('width',355);
+                       $('lmm').setStyle('width',417);                       
+
+                       
+	                   $('ldm').setStyle('width',417);
+	                   var w=(wwidth-(417+355+355))/2;
+	                   $('ldl').setStyle('width',w+355);
+	                   $('ldr').setStyle('width',(wwidth-(417+355+w)));                   
+	                     
+	                    $('lmll').setStyle('width',w);	
+	                    $('lmrr').setStyle('width',w);		                       
+	                }
+}
+var g_Radio=1.25;//1.78
+function  ChangeRadio() {
+    if(g_Radio==1.25)
+    {
+        g_Radio=1.78;            
+    }
+    else
+    {
+        g_Radio=1.25;
+    }
+    resizeM();
+    
+    
+}
+
+function resizeM(){
+         var mbbw;
+	var mbbh;
+	var wwidth =document.documentElement.clientWidth;
+	var wheight=document.documentElement.clientHeight;
+	if (wheight<682) wheight=682;
+	//ma31,dra24,mc13,pb26
+
+	mbbh=wheight-$(ma).getCoordinates().height-$(dra).getCoordinates().height-$(mc).getCoordinates().height-$(pb).getCoordinates().height-5-10;
+	
+	glhight=wheight-$(ma).getCoordinates().height-$(dra).getCoordinates().height-$(mc).getCoordinates().height+5-10;
+	//mcup:349
+	grhight=wheight-349-$(ma).getCoordinates().height-$(dra).getCoordinates().height-$(mc).getCoordinates().height+5-10;
+	
+	//mbbw=mbbh *64/51;
+	mbbw=mbbh *g_Radio;
+	$('mb').setStyle('width', mbbw+(180*2+8));
+	$('mbb').setStyle('width', mbbw);//yzt 0508
+	$('mbb').setStyle('height', mbbh);	
+	$('mbal').setStyle('height', glhight);
+	$('yt3').setStyle('height', grhight);
+	$('backGround').setStyle('height', wheight);	
+	$('dcl').setStyle('height', glhight);
+	$('QS').setStyle('left', $(mbc).getCoordinates().right+10);
+	
+	//wzy20190893
+	//$('ma').setStyle('width', $(mba).getCoordinates().left*2+$(mba).getCoordinates().width+$(mbb).getCoordinates().width+$(mbc).getCoordinates().width+3);
+	$('ma').setStyle('width',Math.max(wwidth,g_initWidth));
+	$('mc').setStyle('width',$(ma).getCoordinates().width);
+	
+	if(g_Radio==1.78|| !g_bSubQS1&& !g_bSubQS2 && !g_bSubQS3 && !g_bSubQS4)
+	{
+	   $('QS').setStyle('left', screen.width-130);
+	   $('QS').style.display='none';
+	}else
+	{
+	   if(g_bQS&&!g_bClose)
+	   {
+	     $('QS').style.display='';
+	   }
+	   
+	}
+	if( g_bSubQS1&& g_bSubQS2 && g_bSubQS3 && g_bSubQS4 )
+	{
+		$('QS').setStyle('top', screen.height-700);
+	}
+	else
+	{
+ 		$('QS').setStyle('top', screen.height-600);
+ 	}
+	if (window.ActiveXObject) {
+                                 var ua = navigator.userAgent.toLowerCase();
+                                var ie=ua.match(/msie ([\d.]+)/)[1]
+                               	if(ie==6.0){
+				    
+                                    position_fixed(document.getElementById("QS"),wwidth-150,wheight-150);
+				     if(screen.width-wwidth>60)
+				     {
+					$('QS').style.display='none';
+				     }else
+				     {
+					if(g_Radio==1.78 || !g_bSubQS1&& !g_bSubQS2 && !g_bSubQS3 && !g_bSubQS4)
+					{
+					   $('QS').style.display='none';
+					}else
+					{
+					   if(g_bQS&&!g_bClose )
+					   {
+					       $('QS').style.display='';
+					   }
+					}
+				     }
+                                    }
+									
+									
+                                }
+	
+}
+
+
+function resize(){
+
+    resizeL();
+    resizeM();
+	
+	
+    }
+window.addEvent('resize',function(){
+	resize();
+	
+});
+    </script>
+
+
+
+
+    <!-- 登入和翻译（待整理） -->
+	
+    <script type="text/javascript">
+	
+    function ld()
+{
+       gexiti=0;
+       gExitChannel[0]=0;
+       gExitSubType[0]=true;
+	var username = $("username").value;
+	var password = $("password").value;
+	var ocxlanguage=$("langlist").selectedIndex+1;	
+	
+var r=ocx.Login(ipaddress,hostport,username,password);
+	if(r==-11700)
+	{
+	    location="err.htm";
+	}
+	if (r>0){
+		//PswMsg();
+		getcl();
+		timeup(2);
+	
+	
+	
+			
+
+		$('password').value="";
+		$('login').style.display="none";
+		$('m').style.top="0px";
+		resize();
+		settings['username'] = username;
+		settings['ocxlanguage'] = ocxlanguage;
+			
+		savesetting();
+		getAudio();
+		getAudioIn();
+		try{
+			ocx.SetPsw();
+		} catch(e){
+		}
+		if(gAutoPlayAll)
+	    {
+	    ocx.PlayAll();
+	    }
+	     g_bClose=false;
+		 
+		 //初始化IPC对讲
+		SetTalkIpcAll();
+	}
+}
+	function SetCookie() 
+	{
+		gHashCookie.extend(settings);
+	}
+
+	
+function timeup(sec) { 
+sec--;      
+if (sec == 0) {
+var shtml="";
+	shtml+="<div id='QSLogo'  style='text-align:center;width:120px;height:120px;background:url(c:/1.bmp) no-repeat bottom left;'></div>"
+	shtml+="<div id='QSText1' style='text-align:center'><span id='QSText' style='color:#000;'></span></div>"
+	shtml+="<div id='QSLogo2' style='text-align:center;width:120px;height:120px;background:url(c:/2.bmp) no-repeat bottom left;'></div>"
+	shtml+="<div id='QSText2' style='text-align:center'><span id='QSText21' style='color:#000;'></span></span></div>"
+	shtml+="<div id='QSLogo3' style='text-align:center;width:120px;height:120px;background:url(c:/3.bmp) no-repeat bottom left;'></div>"
+	shtml+="<div id='QSText3' style='text-align:center'><span style='color:#000;'>IOS</span></div>"
+	shtml+="<div id='QSLogo4' style='text-align:center;width:120px;height:120px;background:url(c:/4.bmp) no-repeat bottom left;'></div>"
+	shtml+="<div id='QSText4' style='text-align:center'><span id='QSText42' style='color:#000;'>Other</span></div>"
+	$("QQ").innerHTML=shtml;
+	$('QSLogo').title=tl('DeviceManage.SerialID');
+	
+	$('QSText').setText(tl('DeviceManage.SerialID'));
+	
+	$('QSLogo2').title=tl('DeviceManage.Android');
+	$('QSLogo3').title=tl('DeviceManage.IOS');
+	$('QSLogo4').title= g_strSubQS4Name;
+	$('QSText42').setText(g_strSubQS4Name);
+	
+	if(!g_bSubQS1)
+	{
+		$('QSLogo').style.display='none'
+		$('QSText1').style.display='none'
+	}
+	if(!g_bSubQS2)
+	{
+		$('QSLogo2').style.display='none'
+		$('QSText2').style.display='none'
+	}
+	if(!g_bSubQS3)
+	{
+		$('QSLogo3').style.display='none'
+		$('QSText3').style.display='none'
+		$('QSLogo2').title=tl('DeviceManage.APP')
+	    $('QSText21').setText(tl('DeviceManage.APP'))
+	}
+	else
+	    $('QSText21').setText(tl('DeviceManage.Android'))
+	if(!g_bSubQS4)
+	{
+		$('QSLogo4').style.display='none'
+		$('QSText4').style.display='none'
+	}
+	if( g_bSubQS1&& g_bSubQS2 && g_bSubQS3 && g_bSubQS4 )
+	{
+		$('QS').setStyle('top', screen.height-700);
+	}
+	if(!g_bSubQS1&& !g_bSubQS2 && !g_bSubQS3 && !g_bSubQS4)
+	{
+		$('QS').style.display='none'
+
+	}
+	//$('QS').style.display='';	
+	
+}
+else {setTimeout("timeup("+sec+")", 1000);}
+}
+function DownLoadLo()
+{
+	if(bCrossBrow)
+	{
+		window.open(DownLoadAddr);
+		return;
+	}else
+	{
+		window.open(DownLoadAddr);
+	}
+}
+	function savesetting() {
+    gHashCookie.extend(settings);
+}
+
+function getCookieValue() {
+	if (gHashCookie.get('username')) {
+		settings['username'] = gHashCookie.get('username');
+	} else {
+		settings['username'] = '';
+	}
+	if (gHashCookie.get('ocxlanguage')) {
+		
+	    settings['ocxlanguage'] = gHashCookie.get('ocxlanguage');
+	}
+	else
+	{
+	    settings['ocxlanguage'] = numLanguage+1;
+	}
+	if (gHashCookie.get('NeedUpgrade')) {
+		
+	    settings['NeedUpgrade'] = gHashCookie.get('NeedUpgrade');
+	}
+	else
+	{
+	    settings['NeedUpgrade'] = false;
+	}
+	if (gHashCookie.get('Upgraded')) {
+		
+	    settings['Upgraded'] = gHashCookie.get('Upgraded');
+	}
+	else
+	{
+	    settings['Upgraded'] = false;
+	}
+	if (gHashCookie.get('cabversion')) {
+		
+	    settings['cabversion'] = gHashCookie.get('cabversion');
+	}
+	else
+	{
+	    settings['cabversion'] = null;
+	}
+}
+
+function getsetting(){
+    getCookieValue();
+	    var cLanguage;
+    switch(settings['ocxlanguage'])
+    {
+      case 1:
+             cLanguage="English";
+            
+             break;
+      case 2:
+             cLanguage="French";
+            
+             break;
+      case 3:
+             cLanguage="Hungarian";
+            
+             break;
+      case 4:
+             cLanguage="Italian";
+            
+             break;
+      case 5:
+             cLanguage="Japanese";
+             
+             break;
+      case 6:
+             cLanguage="Portugal";
+            
+             break;
+      case 7:
+             cLanguage="Russian";
+             
+             break;
+      case 8:
+             cLanguage="SimpChinese";
+            
+             break;
+      case 9:
+             cLanguage="Spanish";
+            
+             break;
+      case 10:
+             cLanguage="TradChinese";
+             
+             break;
+      case 11:
+             cLanguage="German";
+            
+             break;
+      case 12:
+             cLanguage="Poland";
+            
+             break;
+      case 13:
+             cLanguage="Turkey";
+           
+             break;
+      case 14:
+             cLanguage="Romanian";
+             break;
+      case 15:
+             cLanguage="Suomi";
+             break;
+      case 16:
+             cLanguage="Korean";
+             break;
+      case 17:
+             cLanguage="Farsi";
+             break;
+      case 18:
+             cLanguage="Thai";
+             break;
+      case 19:
+             cLanguage="Greek";
+             break;
+      case 20:
+             cLanguage="Vietnamese";
+             break;
+      case 21:
+             cLanguage="Brazilian";
+             break;
+      case 22:
+             cLanguage="Hebrew";
+             break;
+      case 23:
+             cLanguage="Arabic";  
+             break; 
+      case 24:
+             cLanguage="Bulgarian";  
+             break;    
+      case 25:
+      		 cLanguage="Czech";  
+             break;
+	  case 26:
+			 cLanguage="Azerbaycan";
+			 break;
+      default:
+             cLanguage="English";
+             break;       
+    }
+    ocx.SetSpecialParamEx2(2,cLanguage,0,0);
+    inilanguage();
+	
+	$('username').setProperty('value', settings['username']); 
+	$('langlist').selectedIndex=settings['ocxlanguage']-1;
+	if(bCrossBrow)
+	{	
+		ocx.SetSpecialParamEx(0,0,0,888);	
+	}
+}
+
+
+function inilanguage(){
+$('DVRcolor').setText(tl('Title.ImageConfig'));
+    $('mthf').setText(tl('WebTitle.Playback'));
+    $('mtrz').setText(tl('WebTitle.Log'));
+    $('mtkhdpz').setText(tl('WebTitle.LocalConfig'));
+    $('mtsbpz').setText(tl('WebTitle.RemoteCfg'));
+    $('mttc').setText(tl('WebTitle.LogOut'));
+    $('xbc').setText(tl('WebPtz.Step')+'(1-8):');
+    if(iLanguage==109)
+    {
+    $('xbc').setText(tl('WebPtz.Step'));
+    }
+    
+    $('xbb').setText(tl('WebPtz.Zoom'));
+    $('xbj').setText(tl('WebPtz.Focus'));
+    $('xgq').setText(tl('WebPtz.Iris'));
+    $('mbcyzd').setText(tl('WebPtz.Preset')+':');
+    $('mbcdjxh').setText(tl('WebPtz.Cruise')+':');
+    $('taba1').setText(tl('WebTitle.ImageColorConfig'));
+    $('xcz').setText(tl('WebBT.SetDefault'));
+    $('xcqsb').setText(tl('WebBT.Reboot'));
+    $('ratio').setText(tl('WebBT.ChangeRatio'));
+    $('taba2').setText(tl('WebTitle.OtherSet'));
+    $('userNameInput').setText(tl('WebInput.UserName'));
+    $('passWordInput').setText(tl('WebInput.Password'));
+    $('loginBT').setText(tl('WebBT.LogIn'));
+    $('PlayAudio').setText(tl('Desktop.PlayMusic'));
+    $('QSC').setText(tl('PlayBack.Close'));
+    
+    
+    $('xp0').title=tl('Desktop.SplitFull');
+    $('xp1').title=tl('Desktop.Split1');
+    $('xp2').title=tl('Desktop.Split4');
+    $('xp3').title=tl('Desktop.Split9');
+    $('xp4').title=tl('Desktop.Split16');
+    $('xp5').title=tl('Desktop.Split25');
+    $('xp6').title=tl('Desktop.Split36');
+    $('startPlayAll').title=tl('WebBT.PlayAll');
+    $('stopPlayAll').title=tl('WebBT.StopPlayAll');
+    $('snap').title=tl('Desktop.Snapshot');
+    $('recordAll').title=tl('WebBT.RecordAll');
+    $('stopRecordAll').title=tl('WebBT.StopRecordAll');
+    $('Audio').title=tl('Desktop.Audio');
+    
+    $('goPreset').title=tl('PtzControl.Goto');
+    $('addPreset').title=tl('PtzControl.AddPreset');
+    $('delPreset').title=tl('PtzControl.DelPreset');
+    $('goCruise').title=tl('PtzControl.Start');
+    $('stopCruise').title=tl('PtzControl.Stop');
+    $('editCruise').title=tl('PtzControl.Edit');
+    
+    $('xtld').title=tl('ConfigEncode.Brightness');
+    $('xtdbd').title=tl('ConfigEncode.Contrast');
+    $('xtbhd').title=tl('ConfigEncode.Saturation');
+    $('xtsd').title=tl('ConfigEncode.Hue');
+    
+//    $('Talk').title=tl('Desktop.StartTalk');
+
+}
+function stopPlayOneChannel(lChannel)
+{
+
+	
+	var tempPlay="c"+(lChannel).toString();
+	var tempRecord="re"+(lChannel).toString();
+
+
+	$(tempPlay).removeClass($(tempPlay).className);
+    $(tempPlay).addClass('cl1');
+	$(tempRecord).removeClass($(tempRecord).className);
+    $(tempRecord).addClass('noRecord');
+          
+//  if(lChannel<g_channelNum-g_digitalChannel)
+//         {
+                  var tempSubPlay="subPlay"+(lChannel).toString();
+            $(tempSubPlay).removeClass($(tempSubPlay).className);
+            $(tempSubPlay).addClass('noSubPlay');  
+/*            }*/
+            
+            
+          
+            
+            getcolors();
+}
+
+function AllChannelCtrl(bPlay, bStopPlay, bRecord,bStopRecord)
+{
+	
+	 if(bPlay)
+    {
+        if(bRecord)//借用于子码流播放
+        {        
+        
+             for(var j=0;j<g_channelNum;j++)
+             {            
+                var tempSubPlay="subPlay"+(j).toString();        
+                $(tempSubPlay).removeClass($(tempSubPlay).className);
+                $(tempSubPlay).addClass('subPlay');
+                
+            }
+        }
+        else
+        {
+        
+           for(var j=0;j<g_channelNum;j++)
+            {
+               var temp="c"+(j).toString();
+                $(temp).removeClass($(temp).className);
+                $(temp).addClass('cl2');
+                          
+            }
+        
+        }
+        
+    }else if(bStopPlay)   
+    {
+        
+          for(var j=0;j<g_channelNum;j++)
+        {
+        
+           var temp="c"+(j).toString();
+            $(temp).removeClass($(temp).className);
+            $(temp).addClass('cl1');
+            
+//             if(j>=g_channelNum-g_digitalChannel)
+//             continue;
+            var tempSubPlay="subPlay"+(j).toString();        
+                $(tempSubPlay).removeClass($(tempSubPlay).className);
+                $(tempSubPlay).addClass('noSubPlay');
+        }
+    }
+    else if(bRecord)
+    {
+            for(var j=0;j<g_channelNum;j++)
+        {
+            var tempPlay="c"+(j).toString();
+            var tempsub="subPlay"+(j).toString();
+            if($(tempPlay).hasClass('cl2') || (/* j<g_channelNum-g_digitalChannel && */$(tempsub).hasClass('subPlay')))
+            {
+                var temp="re"+(j).toString();
+                $(temp).removeClass($(temp).className);
+                $(temp).addClass('record');            
+            }
+           
+        }
+    }
+    else  if(bStopRecord)
+    {
+        for(var j=0;j<g_channelNum;j++)
+        {
+           var temp="re"+(j).toString();
+            $(temp).removeClass($(temp).className);
+            $(temp).addClass('noRecord');
+        }
+    
+    }
+    getcolors();
+}
+
+	function bSound(bs)
+	{
+		
+		 getcolors(); //获取颜色值
+                    if(bs)
+                    {
+                        g_bAudio=true;                        
+                        if($('Audio').hasClass('p102'))
+                        {
+                            $('Audio').removeClass($('Audio').className)
+                            $('Audio').addClass('p10')
+                        }                        
+                    }
+                    else
+                    {
+                        g_bAudio=false;
+                        if($('Audio').hasClass('p10'))
+                        {
+                            $('Audio').removeClass($('Audio').className)
+                            $('Audio').addClass('p102')
+                        }                        
+                    }
+	}
+	function RButtonDown(flag,x,y)
+	{
+		ocx.Fullscreen(false); 
+	}
+	
+	function startPlayExitChannel(channel,bSub)
+	{
+		
+		 gexiti++;
+		gExitChannel[gexiti]=channel;
+		if (bSub==true){
+   
+           gExitSubType[gexiti]=true
+       
+		}
+		else
+		{
+			gExitSubType[gexiti]=false;
+		}
+		getcolors();
+	}
+	
+	 function OneChannelOpen(channel)//打开主码流
+	 {
+		
+        var tempSubPlay="subPlay"+(channel).toString();        
+		if($(tempSubPlay).hasClass('subPlay'))
+		{
+			$(tempSubPlay).removeClass($(tempSubPlay).className);
+			$(tempSubPlay).addClass('noSubPlay');        
+		}    	
+		var tempPlay="c"+(channel).toString();        
+        $(tempPlay).removeClass($(tempPlay).className);
+        $(tempPlay).addClass('cl2');
+        getcolors();
+	 }
+
+	function oneSubOpen(channel)//打开辅码流
+	{
+		
+		 var tempPlay="c"+(channel).toString();    
+		if($(tempPlay).hasClass('cl2'))
+		{
+			$(tempPlay).removeClass($(tempPlay).className);
+			$(tempPlay).addClass('cl1');        
+		}
+		var tempSubPlay="subPlay"+(channel).toString();      
+        $(tempSubPlay).removeClass($(tempSubPlay).className);
+        $(tempSubPlay).addClass('subPlay');
+        getcolors(); 
+	}	
+   
+    function reName(channel)//重命名
+	{
+		 
+		 var ts=new Array();
+		var t= new Array();
+		var strsplita=String.fromCharCode(16);
+		var strsplitb=String.fromCharCode(9);
+		var sc;
+	
+		sc=ocx.GetChannelName();	
+		
+		if (sc !=""){
+		sc=sc.substr(0, sc.length-1);
+		t=sc.split(strsplita);
+			
+			
+			for (var i =0; i<t.length;i++ )
+			{
+			    ts=t[i].split(strsplitb);
+			    var temp="name"+(i).toString();			    		
+			    $(temp).setText(ts[1]);
+			
+			}
+
+		}
+    
+	}
+	
+	 function ReBoot()
+	 {
+		
+		$('talking').removeClass($('talking').className);
+        $('talking').addClass('noT');
+        $('talking').title=tl('Desktop.StartTalk');//关闭对讲
+            
+        for(var j=0;j<g_channelNum;j++)//关闭录像
+        {
+            var temp="re"+(j).toString();
+            $(temp).removeClass($(temp).className);
+            $(temp).addClass('noRecord');
+        }         
+	 }
+	 function AutoPlayAll(bPlay)
+	 {
+		
+		if(bPlay)
+		{
+			gAutoPlayAll=true;
+		}
+		else
+		{
+			gAutoPlayAll=false;    
+		}
+	 }
+	 
+		function DigitalStatus(nStatus,channel)//˽ؖͨր״̬
+	{
+		
+		if (1==nStatus) {
+        var tempSubPlay="subPlay"+(channel).toString();
+    $(tempSubPlay).removeClass($(tempSubPlay).className);
+    $(tempSubPlay).addClass('forbitsubPlay');
+    
+     var tempRecord="re"+(channel).toString();
+    $(tempRecord).removeClass($(tempRecord).className);
+    $(tempRecord).addClass("forbitRecord");
+    
+    var tempPlay="c"+(channel).toString();
+    $(tempPlay).removeClass($(tempPlay).className);
+    $(tempPlay).addClass("forbitPlay");
+   
+	SetTalkIpc(channel, nStatus);
+    }
+    if (0==nStatus) {
+        var tempSubPlay="subPlay"+(channel).toString();
+    $(tempSubPlay).removeClass($(tempSubPlay).className);
+    $(tempSubPlay).addClass('noSubPlay');
+    
+     var tempRecord="re"+(channel).toString();
+    $(tempRecord).removeClass($(tempRecord).className);
+    $(tempRecord).addClass("noRecord");
+    
+    var tempPlay="c"+(channel).toString();
+    $(tempPlay).removeClass($(tempPlay).className);
+    $(tempPlay).addClass("cl1");
+	
+	//SetTalkIpc(channel, nStatus);
+    }
+    if (2==nStatus) {
+    var tempPlay="c"+(channel).toString();
+        $(tempPlay).removeClass($(tempPlay).className);
+        $(tempPlay).addClass("cl2");
+		
+		//SetTalkIpc(channel, nStatus);
+    }
+    if (3==nStatus) {
+    var tempPlay="subPlay"+(channel).toString();
+        $(tempPlay).removeClass($(tempPlay).className);
+        $(tempPlay).addClass("noSubPlay");
+    }
+     if (4==nStatus) {
+    var tempPlay="subPlay"+(channel).toString();
+        $(tempPlay).removeClass($(tempPlay).className);
+        $(tempPlay).addClass("subPlay");
+        
+    }
+    if (5==nStatus) {
+        var tempPlay="re"+(channel).toString();
+        $(tempPlay).removeClass($(tempPlay).className);
+        $(tempPlay).addClass("record");
+    }
+    if (6==nStatus) {
+        var tempPlay="re"+(channel).toString();
+        $(tempPlay).removeClass($(tempPlay).className);
+        $(tempPlay).addClass("noRecord");
+    }
+	 if (7==nStatus) {
+        var tempSubPlay="subPlay"+(channel).toString();
+    $(tempSubPlay).removeClass($(tempSubPlay).className);
+    $(tempSubPlay).addClass('noSubPlay');
+    
+     var tempRecord="re"+(channel).toString();
+    $(tempRecord).removeClass($(tempRecord).className);
+    $(tempRecord).addClass("noRecord");
+    
+    var tempPlay="c"+(channel).toString();
+    $(tempPlay).removeClass($(tempPlay).className);
+    $(tempPlay).addClass("cl1");
+	
+	SetTalkIpc(channel, nStatus);
+    }
+   
+	
+    getcolors();
+	}
+	
+	
+	function StopPosition()
+	{
+	   $('menu').removeClass($('menu').className);
+       $('menu').addClass('PositionStop');
+	}
+	
+	function StartPosition()
+	{
+	   $('menu').removeClass($('menu').className);
+       $('menu').addClass('PositionStart');
+	}
+    function ForbitLanguage()
+	{
+		$('langlist').disabled=true;
+	}
+	function HideQS(bHide)
+	{
+		 if (bHide==true) {
+            $('QS').style.display='none';
+	    g_bQS=false;
+        }else
+        {
+            $('QS').style.display='';
+            g_bQS=true;
+            
+        }
+	}
+    </script>
+
+    <!-- 下拉框 -->
+
+    <script type="text/javascript">
+    function showmu1(){
+	if (gfmu1==0)
+	{	
+		gfmu1=1;
+		$('smu1').style.display="";			
+	}
+	else{
+		closemu1();	
+	}	
+}
+
+function closemu1(){
+	gfmu1=0;
+	$('smu1').style.display="none";
+}
+function onmu1(v){
+	$('ps').value=v;
+	closemu1();
+}
+    </script>
+
+    <!-- 全播放，录像，声音，对讲 -->
+
+    <script type="text/javascript">
+    function startPlayAll() {
+    ocx.PlayAll();
+}
+function StopPlayAll() {
+
+    ocx.StopRealPlayAll();
+}
+function recordAll() {
+
+    if(ocx.startRecordAll("C:\\record"))
+    {
+    }
+}
+function stopRecordAll() {
+    if(ocx.stopRecordAll())
+    {
+    }
+}
+
+function openAudio() {
+    if(g_bAudio)
+    {
+        if(ocx.CloseSound(1))
+        {
+            g_bAudio=false;    
+            $('Audio').removeClass($('Audio').className);
+            $('Audio').addClass('p102') 
+        }        
+    }
+    else
+    {
+        if(ocx.OpenSound(-1))
+        {
+            $('Audio').removeClass($('Audio').className);
+            $('Audio').addClass('p10') 
+            g_bAudio=true; 
+        }    
+    }
+    
+}
+function Ontalk() {
+    if($('talking').hasClass('noT'))
+    {
+        if(ocx.StartTalk())
+        {
+            $('talking').removeClass($('talking').className);
+            $('talking').addClass('t');
+            $('talking').title=tl('Desktop.StopTalk');
+                    
+        }        
+        
+    }
+    else
+    {   
+        if(ocx.StopTalk())
+        {
+            $('talking').removeClass($('talking').className);
+            $('talking').addClass('noT');
+            $('talking').title=tl('Desktop.StartTalk');
+            
+        }
+    
+    } 
+}
+
+function OntalkIpc(lnum) {
+	if (lnum == -1)
+	{
+		 if($('talkingToIpcAll').hasClass('talkIpcAllON'))
+			{
+				//if(ocx.StartTalkIpc(lnum))
+				if (ocx.SetSpecialParamEx2(5000, 0, lnum, 0))
+				{
+					$('talkingToIpcAll').removeClass($('talkingToIpcAll').className);
+					$('talkingToIpcAll').addClass('talkIpcAllOFF');
+					$('talkingToIpcAll').title=tl('Desktop.StopTalkIPCAll');	
+				}        
+			}
+		else
+			{   
+				//if(ocx.StopTalkIpc(lnum))
+				if (ocx.SetSpecialParamEx2(5001, 0, lnum, 0))
+				{
+					$('talkingToIpcAll').removeClass($('talkingToIpcAll').className);
+					$('talkingToIpcAll').addClass('talkIpcAllON');
+					$('talkingToIpcAll').title=tl('Desktop.StartTalkIPCAll');		
+				}
+			} 
+		return ;
+	}
+	if ($('talking'+ lnum).hasClass('disableIPC'))
+	{
+		return ;
+	}
+    if($('talking'+ lnum).hasClass('noTIPC'))
+    {
+       // if(ocx.StartTalkIpc(lnum))
+	   var statusIpc = ocx.SetSpecialParamEx2(5000, 0, lnum, 0)
+	   if (statusIpc)
+        {
+            $('talking'+ lnum).removeClass($('talking'+ lnum).className);
+            $('talking'+ lnum).addClass('tIPC');
+            $('talking'+ lnum).title=tl('Desktop.StopTalkIPC');
+                    
+        }        
+        
+    }
+    else
+    {   
+        //if(ocx.StopTalkIpc(lnum))
+		if (ocx.SetSpecialParamEx2(5001, 0, lnum, 0))
+        {
+            $('talking'+ lnum).removeClass($('talking'+ lnum).className);
+            $('talking'+ lnum).addClass('noTIPC');
+            $('talking'+ lnum).title=tl('Desktop.StartTalkIPC');
+            
+        }
+    } 
+}
+
+function SetTalkIpcAll()
+{
+	var temp = new Array();
+	var sc=ocx.GetChannelName();
+	var strsplita=String.fromCharCode(16);
+	var strsplitb=String.fromCharCode(9);	
+	var talktoipc_All = false;
+	var bEnableTalkIpc = true;
+	var strEnableTalkIpc = "";
+	if (sc !="")
+	{
+		sc=sc.substr(0, sc.length-1);
+		t=sc.split(strsplita);
+		
+		//var funcIpcAllNumber = ocx.GetTalkFuncIpcAll();
+		//strEnableTalkIpc = funcIpcAllNumber + "";
+		//strEnableTalkIpc = ocx.GetTalkFuncIpcAll();
+		//bEnableTalkIpc = ocx.IsEnableTalkIpc();
+		//var funcIpcAllNumber = ocx.SetSpecialParamEx(5003, 0, 0, 0);
+		strEnableTalkIpc = ocx.Translate("5003");
+		//var test = "abcdef";
+		//strEnableTalkIpc = ocx.GetVMInfo(5003);
+		//var test1 = ocx.SetSpecialParam(33);
+		//bEnableTalkIpc = ocx.SetSpecialParamEx2(5004, 0, 0, 0);
+		bEnableTalkIpc = ocx.SetSpecialParamEx2(5004, 0, 0, 0);
+		//bEnableTalkIpc = ocx.SetSpecialParamEx(5004, 0, 0, 0);
+		if ("" != strEnableTalkIpc && "5003" != strEnableTalkIpc)
+		{
+			t = strEnableTalkIpc = strEnableTalkIpc.split("");
+		}
+		
+		for (var i = 0; i < t.length; i++)
+		{
+			try
+			{
+				
+				if (i < g_channelNum-g_digitalChannel || !bEnableTalkIpc || bEnableTalkIpc == undefined )
+				{
+					$('talking'+ i).style.display="none";
+					continue;
+				}
+				else if ("1" == t[i])
+				{
+					$('talking'+ i).removeClass($('talking'+ i).className);
+					$('talking'+ i).addClass('noTIPC');
+					$('talking'+ i).title=tl('Desktop.StartTalkIPC');
+					$('talking'+ i).style.display="";
+					talktoipc_All = true;
+				}
+				else
+				{
+					$('talking'+ i).removeClass($('talking'+ i).className);
+					$('talking'+ i).addClass('disableIPC');
+					$('talking'+ i).title='';
+					$('talking'+ i).style.display="";
+				}
+			}
+			catch(e)
+			{
+				$('talking'+ i).style.display="none";
+				continue;
+			}
+		}
+	
+		if (talktoipc_All)
+		{
+			$('talkingToIpcAll').removeClass($('talkingToIpcAll').className);
+			$('talkingToIpcAll').addClass('talkIpcAllON');
+			$('talkingToIpcAll').title=tl('Desktop.StartTalkIPCAll');	
+			$('talkingToIpcAll').style.display="";
+		}
+		else
+		{
+			$('talkingToIpcAll').style.display="none";
+		}
+		
+	}
+}
+
+function SetTalkIpc(channel, status)
+{
+	//设备ofline，特殊处理
+	if (1 == status)
+	{
+		if ($('talking'+ channel).hasClass('tIPC'))
+		{
+			ocx.SetSpecialParamEx2(5001, 0, channel, 0);
+			//ocx.StopTalkIpc(channel);
+		}
+		
+		$('talking'+ channel).removeClass($('talking'+ channel).className);
+		$('talking'+ channel).addClass('disableIPC');
+		$('talking'+ channel).title='';
+		
+		return 0;
+	}
+	
+	var talktoipc_All = false;
+	//if (ocx.GetTalkFuncIpc(channel))
+	if (ocx.SetSpecialParamEx2(5002, 0, channel, 0))
+	{
+		if ($('talking'+ channel).hasClass('tIPC'))
+		{
+			
+		}
+		else
+		{
+			$('talking'+ channel).removeClass($('talking'+ channel).className);
+			$('talking'+ channel).addClass('noTIPC');
+			$('talking'+ channel).title=tl('Desktop.StartTalkIPC');
+		}
+		
+		talktoipc_All = true;
+	}
+	else
+	{
+		if ($('talking'+ channel).hasClass('tIPC'))
+		{
+			ocx.SetSpecialParamEx2(5001, 0, channel, 0);
+			//ocx.StopTalkIpc(channel);
+		}
+		
+		$('talking'+ channel).removeClass($('talking'+ channel).className);
+		$('talking'+ channel).addClass('disableIPC');
+		$('talking'+ channel).title='';
+	}
+	
+	if (talktoipc_All)
+	{
+		if ($('talkingToIpcAll').hasClass('talkIpcAllOFF'))
+		{
+		
+		}
+		else
+		{
+			$('talkingToIpcAll').style.display = "";
+			$('talkingToIpcAll').removeClass($('talkingToIpcAll').className);
+			$('talkingToIpcAll').addClass('talkIpcAllON');
+			$('talkingToIpcAll').title=tl('Desktop.StartTalkIPCAll');	
+		}
+	}
+	else
+	{
+		for (var i = 0; i < t.length; i++)
+		{
+			//if (ocx.GetTalkFuncIpc(i))
+			if (ocx.SetSpecialParamEx2(5002, 0, i, 0))
+			{
+				talktoipc_All = true;
+				break;
+			}
+			else
+			{
+			
+			}
+		}
+		
+		if (talktoipc_All)
+		{
+			$('talkingToIpcAll').style.display = "";
+			if ($('talkingToIpcAll').hasClass('talkIpcAllOFF'))
+			{
+				
+			}
+			else
+			{
+				$('talkingToIpcAll').removeClass($('talkingToIpcAll').className);
+				$('talkingToIpcAll').addClass('talkIpcAllON');
+				$('talkingToIpcAll').title=tl('Desktop.StartTalkIPCAll');	
+			}
+		}
+		else
+		{
+			if ($('talkingToIpcAll').hasClass('talkIpcAllOFF'))
+			{
+				//ocx.StopTalkIpc(-1);
+			}
+			$('talkingToIpcAll').style.display="none";
+		}
+		
+	}
+}
+    </script>
+
+    <!-- 录像，退出,子码流播放... -->
+
+    <script>
+function subPlay(ob,channel) {
+    
+    if($(ob).hasClass('noSubPlay'))
+    {
+    
+        if(ocx.StartRealPlay(channel,0,1))
+        {
+            $(ob).removeClass($(ob).className);
+            $(ob).addClass('subPlay');
+            getcolors();
+                
+        }
+     }
+     else
+     {
+        if(ocx.StopPlayReal(channel))
+        {
+            $(ob).removeClass($(ob).className);
+            $(ob).addClass('noSubPlay');
+                
+        }
+        
+     }
+       
+}
+function record(ob,channel) {
+    
+    if($(ob).hasClass('noRecord'))
+    {
+    
+        if(ocx.StartRecordByChannel(channel))
+        {
+            $(ob).removeClass($(ob).className);
+            $(ob).addClass('record');
+                
+        }
+     }
+     else
+     {
+        if(ocx.StopRecordBychannel(channel))
+        {
+            $(ob).removeClass($(ob).className);
+            $(ob).addClass('noRecord');
+                
+        }
+        
+     }
+       
+}
+function Logout() {
+    if(ocx.Logout())
+    {
+        	$('m').style.top="-10000px";
+		    $('login').style.display="";
+		    $('preSet').value=1;
+		    $('cruise').value=1;
+		    $('ps').value=5;
+		    $('QS').style.display='none';
+		    g_bClose=true;
+			$('langlist').disabled=false;
+    }
+    
+}
+
+
+function recordCtrl()//点击对应窗口录像（暂时没应用）
+{
+    if(!g_bRecord)
+    {
+        if(ocx.StartRecord('C:\\record'))
+        {
+            $('record').removeClass($('record').className);
+            $('record').addClass('p92')    
+            g_bRecord=true;           
+        }
+        
+    }
+    else
+    {
+        if(ocx.StopRecord())
+        {
+            $('record').removeClass($('record').className);
+            $('record').addClass('p9')        
+            g_bRecord=false;
+        }
+        
+    }
+}
+function StopRealPlay() //根据当前窗口关闭播放（暂时没应用）
+{
+    if(ocx.StopRealPlay())
+    {
+            $('stop').removeClass($('stop').className)
+            $('stop').addClass('p7')        
+    }
+    
+}
+
+function CommonState(nType, nChannel, nStatus){
+if(nType == 0){
+	if(nStatus >= 1 && nStatus <= 4){
+		$("wifiTip").style.background='url(w-'+nStatus+'.png)';
+		$("wifiGroup").style.display="";
+	}else{
+		$("wifiGroup").style.display="none";
+	}
+}else if(nType == 1){
+	if(nStatus >= 0 && nStatus <= 4){
+		$("powerTip").style.background='url(e-'+nStatus+'.png)';
+		$("powerGroup").style.display="";
+	}else{
+		$("powerGroup").style.display="none";
+	}
+}
+}
+
+    </script>
+
+    <!-- 事件 -->  
+    <script language="javascript" for="ocx" event="PlayAudio(bIsPlay)">
+        if (bIsPlay) {
+            $('PlayAudio').style.display='';
+        }else
+        {
+           $('PlayAudio').style.display="none";
+        }
+    </script>
+	<script language="JavaScript" type="text/JavaScript">
+	var tmpDate = new Date();
+	var year= tmpDate.getFullYear();
+    </script> 
+    <script language="javascript" for="ocx" event="reName(channel)">  
+     reName(channel);
+    </script>
+	
+    <script language="javascript" for="ocx" event="HideQS(bHide)">         
+     HideQS(bHide);
+    </script>
+     <script language="javascript" for="ocx" event="ShowSubQS(bShow1, bShow2, bShow3, bShow4, name4)"> 
+  
+        if(bShow1) {
+           // $('QSLogo').style.display= '';
+	    			g_bSubQS1 = true;
+        }else
+        {
+            //$('QSLogo').style.display='none';
+            g_bSubQS1 = false;
+        }
+        
+        if(bShow2) {
+            //$('QSLogo2').style.display= '';
+	    			g_bSubQS2 = true;
+        }else
+        {
+            //$('QSLogo2').style.display='none';
+            g_bSubQS2 = false;
+        }
+        
+        if(bShow3) {
+            //$('QSLogo3').style.display= '';
+	    			g_bSubQS3 = true;
+        }else
+        {
+            //$('QSLogo3').style.display='none';
+            g_bSubQS3 = false;
+        }
+        if(bShow4) {
+            //$('QSLogo4').style.display= '';
+	    			g_bSubQS4 = true;
+        }else
+        {
+            //$('QSLogo4').style.display='none';
+            g_bSubQS4 = false;
+        }
+        g_strSubQS4Name = name4;
+    </script>
+    <script language="javascript" for="ocx" event="oneSubOpen(channel)">    
+    oneSubOpen(channel);
+    </script>
+	
+    <script language="javascript" for="ocx" event="ForbitLanguage()"> 
+     
+    $('langlist').disabled=true;
+    </script>
+    <script language="javascript" for="ocx" event="SelEnglish()"> 
+       numLanguage=0;
+    </script>
+    <script language="javascript" for="ocx" event="StopPosition()"> 
+       $('menu').removeClass($('menu').className);
+       $('menu').addClass('PositionStop');
+    </script>
+    <script language="javascript" for="ocx" event="StartPosition()"> 
+       $('menu').removeClass($('menu').className);
+       $('menu').addClass('PositionStart');
+    </script>
+     <script language="javascript" for="ocx" event="DigitalStatus(nStatus,channel)"> 
+    if (1==nStatus) {
+        var tempSubPlay="subPlay"+(channel).toString();
+    $(tempSubPlay).removeClass($(tempSubPlay).className);
+    $(tempSubPlay).addClass('forbitsubPlay');
+    
+     var tempRecord="re"+(channel).toString();
+    $(tempRecord).removeClass($(tempRecord).className);
+    $(tempRecord).addClass("forbitRecord");
+    
+    var tempPlay="c"+(channel).toString();
+    $(tempPlay).removeClass($(tempPlay).className);
+    $(tempPlay).addClass("forbitPlay");
+   
+	SetTalkIpc(channel, nStatus);
+    }
+    if (0==nStatus) {
+        var tempSubPlay="subPlay"+(channel).toString();
+    $(tempSubPlay).removeClass($(tempSubPlay).className);
+    $(tempSubPlay).addClass('noSubPlay');
+    
+     var tempRecord="re"+(channel).toString();
+    $(tempRecord).removeClass($(tempRecord).className);
+    $(tempRecord).addClass("noRecord");
+    
+    var tempPlay="c"+(channel).toString();
+    $(tempPlay).removeClass($(tempPlay).className);
+    $(tempPlay).addClass("cl1");
+	
+	//SetTalkIpc(channel, nStatus);
+    }
+    if (2==nStatus) {
+    var tempPlay="c"+(channel).toString();
+        $(tempPlay).removeClass($(tempPlay).className);
+        $(tempPlay).addClass("cl2");
+    }
+    if (3==nStatus) {
+    var tempPlay="subPlay"+(channel).toString();
+        $(tempPlay).removeClass($(tempPlay).className);
+        $(tempPlay).addClass("noSubPlay");
+    }
+     if (4==nStatus) {
+    var tempPlay="subPlay"+(channel).toString();
+        $(tempPlay).removeClass($(tempPlay).className);
+        $(tempPlay).addClass("subPlay");
+        
+    }
+    if (5==nStatus) {
+        var tempPlay="re"+(channel).toString();
+        $(tempPlay).removeClass($(tempPlay).className);
+        $(tempPlay).addClass("record");
+    }
+    if (6==nStatus) {
+        var tempPlay="re"+(channel).toString();
+        $(tempPlay).removeClass($(tempPlay).className);
+        $(tempPlay).addClass("noRecord");
+    }
+	 if (7==nStatus) {
+        var tempSubPlay="subPlay"+(channel).toString();
+    $(tempSubPlay).removeClass($(tempSubPlay).className);
+    $(tempSubPlay).addClass('noSubPlay');
+    
+     var tempRecord="re"+(channel).toString();
+    $(tempRecord).removeClass($(tempRecord).className);
+    $(tempRecord).addClass("noRecord");
+    
+    var tempPlay="c"+(channel).toString();
+    $(tempPlay).removeClass($(tempPlay).className);
+    $(tempPlay).addClass("cl1");
+	
+	SetTalkIpc(channel, nStatus);
+    }
+   
+	
+    getcolors();
+     </script>
+
+    <script language="javascript" for="ocx" event="OneChannelOpen(channel)">//某个通道打开，比如报警
+    OneChannelOpen(channel);
+    </script>
+
+    <script language="javascript" for="ocx" event="startPlayExitChannel(channel,bSub)">//开始播放上回退出视频
+    OneChannelOpen(channel);
+    </script>
+
+    <script language="javascript" for="ocx" event="RButtonDown(flag,x,y)">//右键退出（退出全屏）
+        ocx.Fullscreen(false); 
+    </script>
+
+    <script language="javascript" for="ocx" event="stopPlayOneChannel(lChannel)">//停止一个通道的播放（图标变色）
+    
+var tempPlay="c"+(lChannel).toString();
+var tempRecord="re"+(lChannel).toString();
+
+
+$(tempPlay).removeClass($(tempPlay).className);
+            $(tempPlay).addClass('cl1');
+$(tempRecord).removeClass($(tempRecord).className);
+            $(tempRecord).addClass('noRecord');
+          
+//             if(lChannel<g_channelNum-g_digitalChannel)
+//             {
+                  var tempSubPlay="subPlay"+(lChannel).toString();
+            $(tempSubPlay).removeClass($(tempSubPlay).className);
+            $(tempSubPlay).addClass('noSubPlay');  
+/*            }*/
+            
+            
+          
+            
+            getcolors();
+    </script>
+
+    <script language="javascript" for="ocx" event="bRecordAndRealPlay(bRecord, bRealPlay)">//选中一个窗口（翻译当前窗口的录像，和播放开关状态）
+            if(bRealPlay==true)
+            {
+                
+            }
+            {
+                            
+            }
+    
+                  //getcolors(); //获取颜色值
+    </script>
+
+    <script language="javascript" for="ocx" event="AllChannelCtrl( bPlay, bStopPlay, bRecord,bStopRecord)">//全通道录像，播放开关,(子码播放用到，record两个变量)
+    if(bPlay)
+    {
+        if(bRecord)//借用于子码流播放
+        {        
+        
+             for(var j=0;j<g_channelNum;j++)
+             {            
+                var tempSubPlay="subPlay"+(j).toString();        
+                $(tempSubPlay).removeClass($(tempSubPlay).className);
+                $(tempSubPlay).addClass('subPlay');
+                
+            }
+        }
+        else
+        {
+        
+           for(var j=0;j<g_channelNum;j++)
+            {
+               var temp="c"+(j).toString();
+                $(temp).removeClass($(temp).className);
+                $(temp).addClass('cl2');
+                          
+            }
+        
+        }
+        
+    }else if(bStopPlay)   
+    {
+        
+          for(var j=0;j<g_channelNum;j++)
+        {
+        
+           var temp="c"+(j).toString();
+            $(temp).removeClass($(temp).className);
+            $(temp).addClass('cl1');
+            
+//             if(j>=g_channelNum-g_digitalChannel)
+//             continue;
+            var tempSubPlay="subPlay"+(j).toString();        
+                $(tempSubPlay).removeClass($(tempSubPlay).className);
+                $(tempSubPlay).addClass('noSubPlay');
+        }
+    }
+    else if(bRecord)
+    {
+            for(var j=0;j<g_channelNum;j++)
+        {
+            var tempPlay="c"+(j).toString();
+            var tempsub="subPlay"+(j).toString();
+            if($(tempPlay).hasClass('cl2') || (/* j<g_channelNum-g_digitalChannel && */$(tempsub).hasClass('subPlay')))
+            {
+                var temp="re"+(j).toString();
+                $(temp).removeClass($(temp).className);
+                $(temp).addClass('record');            
+            }
+           
+        }
+    }
+    else  if(bStopRecord)
+    {
+        for(var j=0;j<g_channelNum;j++)
+        {
+           var temp="re"+(j).toString();
+            $(temp).removeClass($(temp).className);
+            $(temp).addClass('noRecord');
+        }
+    
+    }
+    getcolors();
+    </script>
+
+    <script language="javascript" for="ocx" event="bSound(bs)">//选择窗口是否有播放声音
+    bSound(bs);
+    </script>
+
+    <script language="javascript" for="ocx" event="ReBoot()">
+    
+     ReBoot();
+    </script>
+    <script language="javascript" for="ocx" event="AutoPlayAll(bPlay)">
+    AutoPlayAll(bPlay);
+    </script>
+    
+    <script for="ocx" event="SpecialEvent(nType,nNumber,nCheck)" type="text/javascript">
+    
+    if(nType==1)
+    {
+        g_Radio=1.78;
+        resizeM();              
+    }
+    </script>
+
+	<script language="javascript" for="ocx" event="GotoLogin(nFlag)">
+		location="index.htm";
+	</script>
+	<script language="javascript" for="ocx" event="CommonState(nType, nChannel, nStatus)">
+		CommonState(nType, nChannel, nStatus);
+	</script>
+    <!-- 加载效果 -->
+
+    <script>
+window.addEvent('domready',function(){
+$('langlist').disabled=false;//兼容火狐
+if(g_whitePage)
+{
+return;
+}
+//拖动
+	var container = $('mb');
+	var drop = $('drb');
+	var mba=$('mba');
+	var mbb=$('mbb');
+	var mbc=$('mbc');
+	var dropFx = drop.effect('opacity', {wait: false}); // wait is needed so that to toggle the effect,
+	var bedra= $('dra');
+	var bedrc= $('drc');
+	bedra.addEvent('mousedown', function(e) {
+		e = new Event(e).stop();			
+		var clone = this.clone()
+			.setStyles(this.getCoordinates()) // this returns an object with left/top/bottom/right, so its perfect
+			.setStyles({'opacity': 0.7, 'position': 'absolute'})
+			.addEvent('emptydrop', function() {this.remove();drop.removeEvents();})						
+			.inject(document.body);	
+		drop.addEvents({
+			'drop': function() {
+				drop.removeEvents();
+				clone.remove();							
+				dropFx.start('1');											
+				if (mbc.getStyle('left') !='0px')
+				{
+					mbc.setStyle('left','0');
+					mbc.injectBefore(mba);
+					mbb.injectBefore(mba);
+				}
+				else{
+					mbc.setStyle('left','120');							
+					mba.injectBefore(mbc);
+					mbb.injectBefore(mbc);
+				}
+			},
+			'over': function() {
+				dropFx.start('0.7');
+			},
+			'leave': function() {
+				dropFx.start('1');
+			}						
+		});
+		var drag = clone.makeDraggable({
+			'container':container,
+			'droppables': [drop]
+		}); // this returns the dragged element
+		drag.start(e); // start the event manual	
+	});
+
+
+	bedrc.addEvent('mousedown', function(e) {
+		e = new Event(e).stop();			
+		var clone = this.clone()
+			.setStyles(this.getCoordinates()) // this returns an object with left/top/bottom/right, so its perfect
+			.setStyles({'opacity': 0.7, 'position': 'absolute'})
+			.addEvent('emptydrop', function() {this.remove();drop.removeEvents();})						
+			.inject(document.body);	
+		drop.addEvents({
+			'drop': function() {
+				drop.removeEvents();
+				clone.remove();							
+				dropFx.start('1');											
+				if (mbc.getStyle('left') !='0px')
+				{
+					mbc.setStyle('left','0');
+					mbc.injectBefore(mba);
+					mbb.injectBefore(mba);
+				}
+				else{
+					mbc.setStyle('left','120');							
+					mba.injectBefore(mbc);
+					mbb.injectBefore(mbc);
+				}
+			},
+			'over': function() {
+				dropFx.start('0.7');
+			},
+			'leave': function() {
+				dropFx.start('1');
+			}						
+		});
+		var drag = clone.makeDraggable({
+			'container':container,
+			'droppables': [drop]
+		}); // this returns the dragged element
+		drag.start(e); // start the event manual	
+	});
+//颜色滑块
+gslda = new Slider($('saa'), $('ska'), {
+	steps:128,
+	onChange:function(step){setcolorsv(1,step);setcolors();}
+	});
+
+	gsldb = new Slider($('sab'), $('skb'), {
+	steps:128,
+	onChange:function(step){setcolorsv(2,step);setcolors();}
+	});
+	
+	gsldc = new Slider($('sac'), $('skc'), {
+	steps:128,
+	onChange:function(step){setcolorsv(3,step);setcolors();}
+	});
+	
+	gsldd = new Slider($('sad'), $('skd'), {
+	steps:128,
+	onChange:function(step){setcolorsv(4,step);setcolors();}
+	});
+	
+	gslde = new Slider($('sae'), $('ske'), {
+	steps:100,
+	onChange:function(step){setaudiov(step);setaudio();}
+	});
+	
+	gsldf = new Slider($('saf'), $('skf'), {
+	steps:100,
+	onChange:function(step){setaudioInv(step);setaudioIn();}
+	});
+	//********************************
+
+
+
+	var taba1=$('taba1');
+	var taba2=$('taba2');
+	taba1.addEvent('click', function(e){
+		new Event(e).stop();
+		if (this.hasClass('t3'))
+		{
+			this.removeClass(this.className);
+			this.addClass('t1');			
+			taba2.removeClass(taba2.className);
+			taba2.addClass('t3');
+			$('yt3t1').style.display="";			
+			$('yt3t2').style.display="none";			
+		}
+	});
+	
+	taba2.addEvent('click', function(e){
+		new Event(e).stop();
+		if (this.hasClass('t3'))
+		{
+			taba1.removeClass(taba1.className);
+			taba1.addClass('t3');			
+			this.removeClass(this.className);
+			this.addClass('t1');
+			$('yt3t1').style.display="none";			
+			$('yt3t2').style.display="";			
+		}
+	});
+//主菜单
+	var kwicks = $$('#kwick .kwick');
+	var fx = new Fx.Elements(kwicks, {wait: false, duration: 300, transition:Fx.Transitions.Back.easeOut});
+	kwicks.each(function(kwick, i){
+		kwick.addEvent('mouseenter', function(e){
+			var obj = {};
+			obj[i] = {
+				'width': [kwick.getStyle('width').toInt(), 155]
+			};
+			kwicks.each(function(other, j){
+				if (other != kwick){
+					var w = other.getStyle('width').toInt();
+					if (w != 80) obj[j] = {'width': [w,110]};
+				}
+			});
+			fx.start(obj);
+		});
+	});
+	
+	$('kwick').addEvent('mouseleave', function(e){
+		var obj = {};
+		kwicks.each(function(other, j){
+			obj[j] = {'width': [other.getStyle('width').toInt(), 120]};
+		});
+		fx.start(obj);
+	});
+	
+	if((!bCrossBrow && browserMatch.version * 1 >= 10) || bCrossBrow){
+		$$('.psw_eye_arc').addEvent('mousedown', PswEyeShowType);
+		$$('.psw_eye_arc').addEvent('mouseup', PswEyeShowType);
+		$$('.PswEyeShow')[0].addEvent('focus', PswEyeShow);
+		$$('.PswEyeShow')[0].addEvent('keyup', PswEyeShow);
+		function PswEyeShowType(e){
+			var b = this.getPrevious();
+			if(!$(b).hasClass('PswEyeShow')) return;
+			if (b.type == "password"){
+				b.type = "text";
+			} else {
+				b.type = "password";
+			}
+
+			$$(".psw_eye_arc").addEvent('mouseout',function() {
+				b.type = "password";
+			});
+		}
+		function PswEyeShow(e){
+			var b = this.getNext();
+			if(!$(b).hasClass('psw_eye_arc')) return;
+			$$(".psw_eye_arc").setStyle("display", "none");
+			if (this.value != "") {
+				b.style.display = "block";
+			} else {
+				b.style.display = "none";
+			}
+		}
+		$$("body").addEvent("click", function(b) {
+			var c = b.srcElement;
+			if (!($(c).hasClass("psw_eye_arc") && c.style.display != "none")) {
+				var n = $(c).getNext();
+				if (!n || !$(n).hasClass("psw_eye_arc")) {
+					$$(".psw_eye_arc").setStyle("display", "none")
+				}
+			}
+		});
+	}
+
+inilanguage();
+getsetting();
+});
+    </script>
+    <script type="text/javascript">
+      function DetectActiveX()
+    {
+        try  
+        {   
+           var comActiveX = new ActiveXObject("WEB.WebCtrl.1");      
+           comActiveX=null;           
+        }   
+        catch(e)   
+        {   
+		    return false;
+	    }
+	    return true;
+    }
+
+    function Download()
+    {
+	    window.open(DownLoadAddr);
+    }
+    var g_whitePage=false;
+    var g_bDownLoadButton=true; 
+    if(false==DetectActiveX())
+  	{
+  	    if (DownLoadAddr) {
+  	        g_bDownLoadButton=true;
+  	    }
+  		
+  		if(LoardAddress&&!bCrossBrow)
+  		{
+  			g_whitePage=true;
+  		}
+  	}	    
+    </script>
+    <script type="text/javascript">
+    function ChangeLang() {
+    var nSel=$('langlist').selectedIndex;
+    var cLanguage;
+    switch(nSel)
+    {
+      case 0:
+             cLanguage="English";
+            
+             break;
+      case 1:
+             cLanguage="French";
+            
+             break;
+      case 2:
+             cLanguage="Hungarian";
+            
+             break;
+      case 3:
+             cLanguage="Italian";
+            
+             break;
+      case 4:
+             cLanguage="Japanese";
+             
+             break;
+      case 5:
+             cLanguage="Portugal";
+            
+             break;
+      case 6:
+             cLanguage="Russian";
+             
+             break;
+      case 7:
+             cLanguage="SimpChinese";
+            
+             break;
+      case 8:
+             cLanguage="Spanish";
+            
+             break;
+      case 9:
+             cLanguage="TradChinese";
+             
+             break;
+      case 10:
+             cLanguage="German";
+            
+             break;
+      case 11:
+             cLanguage="Poland";
+            
+             break;
+      case 12:
+             cLanguage="Turkey";
+           
+             break;
+      case 13:
+             cLanguage="Romanian";
+             break;
+      case 14:
+             cLanguage="Suomi";
+             break;
+      case 15:
+             cLanguage="Korean";
+             break;
+      case 16:
+             cLanguage="Farsi";
+             break;
+      case 17:
+             cLanguage="Thai";
+             break;
+      case 18:
+             cLanguage="Greek";
+             break;
+      case 19:
+             cLanguage="Vietnamese";
+             break;
+      case 20:
+             cLanguage="Brazilian";
+             break;
+      case 21:
+             cLanguage="Hebrew";
+             break;
+      case 22:
+             cLanguage="Arabic";  
+             break;  
+      case 23:
+             cLanguage="Bulgarian";  
+             break; 
+      case 24:
+      		 cLanguage="Czech";  
+             break;
+	  case 25:
+			 cLanguage="Azerbaycan";
+			 break;
+      default:
+             cLanguage="English";
+             break;       
+    }
+    ocx.SetSpecialParamEx2(2,cLanguage,0,0);
+    inilanguage();
+	//2018-08-30 保存语言至cookie
+    settings['ocxlanguage'] = nSel + 1;
+	savesetting();
+	
+    }
+    function Close()
+    {
+	$('QS').style.display='none';
+	g_bClose=true;
+    }
+    function position_fixed(el, eltop, elleft){
+// check is IE6
+if( !window.XMLHttpRequest ){
+
+el.style.position = "absolute";
+window.attachEvent('onscroll', function(){
+//el.style.top = ( document.documentElement.scrollTop + eltop )+"px";
+
+});
+}else{
+el.style.position = "fixed";
+}
+}
+
+    </script>
+
+</head>
+<body style='background: url("bg.jpg") repeat-x;'>
+    <div id="login" style="width: 1903px; display: none;">
+        <div style="top: -2000px; width: 0px; position: absolute;">
+            <a style='background: url("play.gif");'></a>
+            <a style='background: url("record.gif");'></a>
+            <a style='background: url("subPlay.gif");'></a>
+            <a style='background: url("Talk.gif");'></a>
+	  
+	    
+        </div>
+       <!-- <div style="position: absolute; width: 100%; height: 228px; top: 0px; left: 0px;
+            right: 0;">-->
+            <div id="lt" style='background: url("t.jpg") repeat-x rgb(255, 255, 255); width: 100%; height: 228px; text-align: center; position: relative;'>
+             <div id="lang" style="margin: 10px 30px 0px 0px; float: right; position: relative;">
+         
+               <span>Language:</span>
+                <select id="langlist" style="color: rgb(0, 0, 0);" onchange="ChangeLang()"> 
+                 <option>English</option>
+                 <option>Francais</option>
+                 <option>Hugarian</option>
+                 <option>Italian</option>
+                 <option>日本語</option>
+                 <option>PORTUGUÊ</option>
+                 <option>РУССКИЙ</option>
+                 <option>简体中文</option>
+                 <option>ESPAÑOL</option>
+                 <option>繁體中文</option>
+                 <option>Deutscher</option>
+                 <option>Poland</option>
+                 <option>TüRKiYE</option>
+                 <option>Română</option>
+                 <option>SUOMI</option>
+                 <option>한국어</option>
+                 <option>پارسی</option>
+                 <option>ไทย</option>
+                 <option>ΕΛΛΗΝΙΚΑ</option>
+                 <option>Việt</option>
+                 <option>Português(BR)</option>
+                 <option>עברית</option>
+                 <option>العربية</option>
+                 <option>Българскиезик</option>
+                 <option>čeština</option>
+				 <option>Azərbaycan dili</option>
+                </select> 
+                   
+             </div>
+            <div style='background: url("l_topLogo.gif"); width: 417px; height: 228px; margin-right: auto; margin-left: auto;'>
+			<div style='background: url("../logo/webLogo/l_topLogo2.gif"); width: 417px; height: 228px; margin-right: auto; margin-left: auto;'>
+			</div>
+			</div>
+          
+            </div>
+      <!--  </div>-->
+        <div id="lm" style="left: 0px; top: 228px; width: 1903px; height: 299px; right: 0px; position: absolute;">
+            <div id="lmll" style='background: url("lr.jpg") repeat-x; width: 388px; height: 100%; float: left; position: relative;'>
+            </div>
+            <div id="lml" style='background: url("ml.jpg"); margin: 0px; width: 355px; height: 299px; float: left;'>
+            </div>
+            <div id="lmm" style="margin: 0px; width: 417px; height: 299px; float: left;">
+      
+                <div style='background: url("l_bgm.gif"); width: 417px; height: 223px; float: left;'>
+                <div style='background: url("../logo/webLogo/l_bgm2.gif"); width: 417px; height: 223px; position: relative;'>
+                	          <!-- <div style="margin: 0px 0px 0 350px;">
+                                <button  id='DownLoadPlug' onclick="DownLoadLo()" style="margin:10px 0 0 0;color: #000; width: 58px; height: 18px;
+                                    padding: 3px 0px 0 0; border: 0; background: url(board.gif);" >
+                                </button>
+                                
+                   			    </div>-->
+                   			    
+
+                  <div style="width: 11px; height: 100%; float: left;"></div>
+                   <div style='margin: 0px; width: 406px; height: 100%; color: rgb(0, 0, 0); font-family: Arial, "宋体"; font-size: 15px; float: left;'>
+                                    <div id="DownLoadPlug" style='background: url("board.gif"); margin: 10px 0px 0px 340px; padding: 3px 0px 0px 2px; width: 56px; height: 14px; overflow: hidden; cursor: pointer;' onclick="DownLoadLo();">DownLoad</div>
+                                
+                        <div style="width: 100%; display: inline;">
+							<div id="logo1" style="background: none; margin: 0px 122px 0px 0px; width: 135px; height: 31px; float: right; display: inline;"></div>
+                        </div>
+                        <div style="margin: 7px 0px 0px; width: 100%; float: right;">
+                        <input id="username" style="width: 133px; height: 25px; line-height: 25px; margin-top: 0px; margin-right: 120px;" onkeydown="javascript:if (event.keyCode==13) event.keyCode=9;" type="text">
+                            <span id="userNameInput" style='margin: 0px 3px 0px 0px; padding-top: 6px; font-family: Arial, "宋体"; font-size: 15px; float: right;'>Usuario</span>
+                                
+                        </div>
+                        <div style="margin: 5px 0px 0px; width: 100%; float: right;">
+						<div id="reminder" style='background: url("help.gif"); margin: 5px 93px 0px 0px; width: 17px; height: 17px; float: right;' onclick="reminder();">                               
+							</div>
+                        <input class="PswEyeShow" id="password" style="width: 133px; height: 25px; line-height: 25px; margin-top: 0px; margin-right: 10px;" onkeydown="javascript:if (event.keyCode==13) ld();" type="password">
+						<div class="psw_eye_arc" id="psw_eye" style="display: none;"></div>
+                            <span id="passWordInput" style='margin: 0px 3px 0px 0px; padding-top: 6px; font-family: Arial, "宋体"; font-size: 15px; float: right;'>Contrasenã</span>                            
+                        </div>
+						
+						 
+						
+                        <div style="margin: 0px 0px 0px 174px;">
+                            <button id="loginBT" style='background: url("bt.gif"); margin: 25px 0px 0px; padding: 4px 0px 0px; border: 0px currentColor; border-image: none; width: 88px; height: 28px; color: rgb(0, 0, 0);' onclick="ld()">Login</button>
+                        </div>
+                    </div>
+                  </div>
+                    
+                </div>
+                <div style='background: url("l_bgmd.gif"); width: 417px; height: 76px; float: left;'>
+                </div>
+           
+            </div>
+            <div id="lmr" style='background: url("mr.jpg"); width: 355px; height: 299px; float: left;'>
+            </div>
+            <div id="lmrr" style='background: url("lr.jpg") repeat-x; width: 388px; height: 100%; float: left; position: relative;'>
+            </div>
+        </div>
+        <div style="left: 0px; top: 527px; width: 100%; height: 266px; position: absolute;">
+            <div id="ldl" style='background: url("dlr.jpg") repeat-x; width: 743px; height: 66px; float: left;'>
+            </div>
+            <div id="ldm" style='background: url("dm.jpg"); width: 417px; height: 66px; float: left;'>
+            </div>
+            <div id="ldr" style='background: url("dlr.jpg") repeat-x; width: 743px; height: 66px; float: left;'>
+            </div>
+            <div style='background: url("dlr.jpg") repeat-x; width: 100%; height: 200px; float: left;'>
+            </div>
+        </div>
+    </div>
+    <div id="downLoad" style="width: 100%; height: 100%; margin-top: 0px; display: none; background-color: rgb(255, 255, 255);">
+    <div id="dlText" style="margin: 300px 0px 0px 30px; width: 540px; text-align: center; color: rgb(0, 0, 0); float: left;"></div>
+    <button id="dlbutton" style="margin: 300px 0px 0px; width: 100px; color: rgb(0, 0, 0); float: left;" onclick="Download();"></button>
+    </div>
+    
+    <script type="text/javascript">
+    if(!g_whitePage)
+    {
+    	if(g_bDownLoadButton)
+    	{
+    		$('DownLoadPlug').style.display='';
+    		$('logo1').setStyle('margin-top',0);	
+    		var userla=navigator.browserLanguage;
+				if(userla=="zh-cn")
+				{
+					$('DownLoadPlug').setText("下载控件"); 
+				}
+				else
+				{
+					$('DownLoadPlug').setText("DownLoad");
+				}
+			var len = navigator.mimeTypes.length;					
+			for(var i = 0; i < len; i++) 
+			{
+				if(navigator.mimeTypes[i].type.toLowerCase() == "application/nptest-plugin") 
+				{
+					bnpCheck = true;
+					
+					$('DownLoadPlug').style.display="none";	
+					$('logo1').setStyle('margin-top',31);
+					break;
+				}
+			}
+			
+    	}
+    	else
+    		{
+    			$('DownLoadPlug').style.display="none";
+    		}
+    		
+    	if(!bCrossBrow||bnpCheck)	
+        $('login').style.display='';
+        resizeL();
+    }
+    else
+    {   
+            
+        var userla=navigator.browserLanguage;
+				if(userla=="zh-cn")
+				{
+				    $('dlText').setText("请安装随机光盘中的IE控件或者从网络下载IE控件");
+					$('dlbutton').setText("下载");
+					
+				}
+				else
+				{
+				    $('dlText').setText("Please install IE ActiveX: IE_Plugins.exe from CD or download from internet");
+					$('dlbutton').setText("Download");					
+				}
+        $('downLoad').style.display='';        
+    }
+ 
+</script>
+
+    <div id="m" style="top: 0px;">
+        <div id="backGround" style='background: url("bg.jpg") repeat-x; height: 969px;'>
+            <div id="ma" style="width: 1920px;">
+                <div style="width: 900px;">
+                    <div id="maa">
+                    </div>
+                    <div id="mab">
+                    </div>
+                    <div id="mac">
+                      <div style='background: url("../logo/webLogo/logo.gif"); width: 126px; height: 100%; position: relative;'>
+                    </div>
+                    </div>
+                    <div id="mad">
+                    </div>
+                    <div id="kwick">
+                        <ul class="kwicks">
+                            <li><span class="kwick b" id="mthf" onclick="ocx.ShowPlayBack()">Repetir</span></li>
+                            <li><span class="kwick c" id="mtrz" onclick="ocx.ShowLog()">Texto</span></li>
+                            <li><span class="kwick a" id="mtsbpz" onclick="ocx.ShowDeviceConfig()">Cfg equipo</span></li>
+                            <li><span class="kwick d" id="mtkhdpz" onclick="ocx.ShowClientConfig()">Cfg local</span></li>
+                            <li><span class="kwick e" id="mttc" onclick="Logout()">Logout</span></li>
+                        </ul>
+                    </div>
+                    <div id="mae">
+                    </div>
+                </div>
+            </div>
+            <div id="mb" style="width: 1889.9px;">
+                <div id="mba" style="padding: 0px 0px 0px 5px; float: left;">
+                    <div class="mpad">
+                        <div id="dra" style='background: url("m_dram.jpg"); height: 29px; position: relative;'>
+                            <div style='background: url("m_dral.jpg"); width: 8px; height: 29px; float: left;'>
+                            </div>
+                            <div style='background: url("m_drar.jpg"); margin: 0px; width: 8px; height: 29px; float: right; cursor: move;'>
+                            </div>
+                        </div>
+                        <div id="dcl" style="height: 891px;">
+                            <div id="mbal" style='background: url("mb_bg.jpg") repeat-x; margin: 0px; padding: 0px; height: 891px; overflow: auto; position: relative;'>
+                                <ul id="cl"><li id="Talk"><a title="TalkIpcAllOn" class="talkIpcAllON" id="talkingToIpcAll" style="display: none;" onclick="OntalkIpc(-1)" href="javascript:;"></a><a title="Empieza ainterhablar" class="noT" id="talking" onclick="Ontalk()" href="javascript:;"></a><span id="logoString" style="margin: 0px 5px 0px 3px;">NetSurveillance</span></li> <li><a title="Empieza ainterhablar" class="noTIPC" id="talking0" style="display: none;" onclick="OntalkIpc(0)" href="javascript:;"></a><a title="Grabación local" class="noRecord" id="re0" style="width: 19px;" onclick="record(this,0)" href="javascript:;"></a><a title="Tasade vits secundaria" class="noSubPlay" id="subPlay0" style="width: 19px;" onclick="subPlay(this,0)" href="javascript:;"></a><a title="Tasade vits principal" class="cl2" id="c0" onclick="ca(this,0)"></a><span id="name0" style="margin: 3px 0px 0px; white-space: nowrap; position: absolute;">Garage</span></li></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="mbb" style="padding: 0px 0px 0px 5px; left: 120px; width: 1521.9px; height: 855px; float: left;">
+                    <div id="drb" style='background: url("m_dram.jpg"); width: 100%; height: 29px; float: left;'>
+                        <div style='background: url("m_dral.jpg"); width: 8px; height: 29px; float: left;'>
+                        </div>
+                        <div style='background: url("m_drar.jpg"); margin: 0px; width: 8px; height: 29px; float: right;'>
+                        </div>
+                    </div>
+                    <div id="pla" style="padding: 0px; width: 100%; height: 100%; float: left;">
+
+                        <script>
+                   
+					if(g_whitePage)
+					{
+					
+					}
+					else
+					{
+					     var cLanguage;
+					switch(iLanguage)
+					{
+					case 100:
+						cLanguage="English";
+						numLanguage=0;
+						break;
+					case 101:
+						cLanguage="SimpChinese";
+						numLanguage=7;
+						break;
+					case 102:
+						cLanguage="TradChinese";
+						numLanguage=9;
+						break;
+					case 103:
+						cLanguage="Italian";
+						numLanguage=3;
+						break;
+					case 104:
+						cLanguage="Spanish";
+						numLanguage=8;
+						break;
+					case 105:
+						cLanguage="Japanese";
+						numLanguage=4;
+						break;
+					case 106:
+						cLanguage="Russian";
+						numLanguage=6;
+						break;
+					case 107:
+						cLanguage="French";
+						numLanguage=1;
+						break;
+					case 108:
+						cLanguage="German";
+						numLanguage=10;
+						break;
+					case 109:
+						cLanguage="Portugal";
+						numLanguage=5;
+						break;
+					case 110:
+						cLanguage="Turkey";
+						numLanguage=12;
+						break;
+					case 111:
+						cLanguage="Poland";
+						numLanguage=11;
+						break;
+					case 112:
+						cLanguage="Romanian";
+						numLanguage=13;
+						break;
+					case 113:
+						cLanguage="Hungarian";
+						numLanguage=2;
+						break;
+					case 114:
+						cLanguage="Finnish";
+						numLanguage=14;
+						break;
+					case 116:
+						cLanguage="Korean";
+						numLanguage=15;
+						break;
+					case 117:
+						cLanguage="Farsi";
+						numLanguage=16;
+						break;
+					case 119:
+						cLanguage="Thai";
+						numLanguage=17;
+						break;
+					case 120:
+						cLanguage="Greek";
+						numLanguage=18;
+						break;
+					case 121:
+						cLanguage="Vietnamese";
+						numLanguage=19;
+						break;
+					case 123:
+						cLanguage="Brazilian";
+						numLanguage=20;
+						break;
+					case 124:
+						cLanguage="Hebrew";
+						numLanguage=21;
+						break;
+					case 125:
+						cLanguage="Indonesian";
+						numLanguage=0;
+						break;
+					case 126:
+						cLanguage="Arabic";
+						numLanguage=22;
+						break;
+					case 127:
+						cLanguage="Swedish";
+						numLanguage=0;
+						break;
+					case 128:
+						cLanguage="Czech";
+						numLanguage=24;
+						break;
+					case 129:
+						cLanguage="Bulgarian";
+						numLanguage=23;
+						break;
+					case 134:
+						cLanguage="Azerbaycan";
+						numLanguage=25;
+						break;
+					case 189:
+						cLanguage="Czech";
+						numLanguage=24;
+						break;
+					default:
+						cLanguage="English";
+						numLanguage=0;
+						break;
+					}			
+					//document.write(" <div style='position: absolute; top: -1000px;'><a style='background:url(yta11.jpg)'></a> <a style='background: url(yt-1.gif)'></a><a style='background: url(yt+1.gif)'></a><a style='background: url(11.jpg)'></a><a style='background: url(91.jpg)'></a><a style='background: url(41.jpg)'></a><a style='background: url(stopRecordAll1.jpg)'></a> <a style='background: url(m_img21.jpg)'></a><a style='background: url(m_img41.jpg)'>      </a><a style='background: url(audio.jpg)'></a><a style='background: url(yt11.jpg)'></a>        <a style='background: url(yt21.jpg)'></a><a style='background: url(yt31.jpg)'></a>        <a style='background: url(yt41.jpg)'></a><a style='background: url(yt51.jpg)'></a>        <a style='background: url(yt61.jpg)'></a><a style='background: url(yt71.jpg)'></a>        <a style='background: url(yt81.jpg)'></a><a style='background: url(yt91.jpg)'></a>        <a style='background: url(yt+1.png)'></a><a style='background: url(yt-1.png)'></a>        <a style='background: ur					
+					if(bCrossBrow)//crossBrow
+					{
+						document.write("<object id='ocx' type='application/nptest-plugin' width='100%' height='100%' ></object>") 
+						
+						
+						if(!bnpCheck)
+						{
+							/*$('DownLoadPlug').style.display='';
+							$('logo1').setStyle('margin-top',0);
+							var userla=navigator.language;
+							$('DownLoadPlug').setStyle('margin-left',-2);
+							$('DownLoadPlug').setStyle('width',400);
+							$('DownLoadPlug').setStyle('height',27);
+							$('DownLoadPlug').setStyle('margin-top',2);
+							if(userla=="zh-CN")
+							{
+								$('DownLoadPlug').setText("点击下载Plugin,安装完请先关闭再启动浏览器"); 
+								$('DownLoadPlug').style.background='#969ea8';
+								$('DownLoadPlug').style.color='#000';
+								$('DownLoadPlug').style.fontSize='20px';
+								
+							}
+							else
+							{
+								$('DownLoadPlug').setText("Click on the download plug-in, please close to launch a browser installed");
+								$('DownLoadPlug').style.background='#969ea8';
+								$('DownLoadPlug').style.color='#000';
+								$('DownLoadPlug').style.fontSize='12px';
+							}*/
+							var userla=navigator.language;
+							if(userla=="zh-CN")
+							{
+								$('dlText').setText("点击下载Plugin,安装完请先关闭再启动浏览器");
+								$('dlbutton').setText("下载");
+								
+							}
+							else
+							{
+								$('dlText').setText("Click on the download plug-in, please close to launch a browser installed");
+								$('dlbutton').setText("Download");					
+							}
+							$('downLoad').style.display='';  
+						}
+					}else
+					{	
+
+                        //获取cookie数据
+						getCookieValue();
+						var isUpgraded = gHashCookie.get('Upgraded');           //是否升级过
+						var isNeedUpgrade = gHashCookie.get('NeedUpgrade');     //是否需要升级
+						var cookieCabAddress = gHashCookie.get('cabversion');   //版本信息
+						var realCabAddress = "web.cab#version=0,0,0,0";         //实际发送版本信息
+
+						//是否存在cookie信息
+						if (!cookieCabAddress) {
+							isNeedUpgrade = true;
+						} else {
+							//ocx不可用是否需要升级
+							if (isNeedUpgrade) {
+								//是否是走过一次升级流程
+								if (isUpgraded) {
+									isNeedUpgrade = false;
+								} else {
+									isNeedUpgrade = true;
+								}
+							} else {
+								//设备端是否有升级
+								if (cmpVersion(cookieCabAddress, cabAddress)) {
+									isNeedUpgrade = true;
+								} else {
+									isNeedUpgrade = false;
+								}
+							}
+						}
+						//设置更新地址
+						if (isNeedUpgrade) {
+							realCabAddress = cabAddress;
+						}
+						document.write("<object  id='ocx' width='100%' height='100%' classid='CLSID:FD3BEB0C-AB43-4253-9146-C371D48FBE0D'  codebase='" + realCabAddress + "'><param name='Language' value='" + cLanguage + "'></object>");
+
+						//设置已升级标志
+						if (realCabAddress == cabAddress) {
+							settings['Upgraded'] = true;
+						} else {
+							settings['Upgraded'] = false;
+						}
+
+						//判断ocx是否可用
+						var isUsed = true;
+						try{
+							ocx.Translate("test");
+						}
+						catch(e)
+						{
+							isUsed = false;
+						}
+
+						//根据ocx是否可用判断是否需要设置升级flag
+						if (!isUsed) {
+							settings['NeedUpgrade'] = true;
+						} else {
+							settings['NeedUpgrade'] = false;
+						}
+						//设置版本信息
+						if (cookieCabAddress) {
+							//不保存低版本号
+							if (!cmpVersion(cabAddress, cookieCabAddress)) {
+								settings['cabversion'] = cabAddress;
+							}
+						} else {
+							settings['cabversion'] = cabAddress;
+						}
+						//保存cookie
+						savesetting();
+						
+					}
+					
+					}
+					
+                        </script><object width="100%" height="100%" id="ocx" classid="CLSID:FD3BEB0C-AB43-4253-9146-C371D48FBE0D" codebase="web.cab#version=0,0,0,0"><PARAM NAME="_Version" VALUE="65536"><PARAM NAME="_ExtentX" VALUE="40270"><PARAM NAME="_ExtentY" VALUE="22622"><PARAM NAME="_StockProps" VALUE="0"><PARAM NAME="Language" VALUE="Spanish"><PARAM NAME="ip" VALUE="192.168.0.48"><PARAM NAME="passPort" VALUE="0"><PARAM NAME="WndBGColor" VALUE="-1"><PARAM NAME="BorderBGColor" VALUE="-1"><PARAM NAME="BordColor" VALUE="-1"><param name="Language" value="Spanish"></object>
+
+                    </div>
+                    <div id="plc" style='background: url("plcb11.jpg"); margin: 2px 0px 0px; width: 100%; height: 33px; float: left;'>
+                        <div style='background: url("plcbl.jpg"); width: 7px; height: 33px; float: left;'>
+                        </div>
+                        <div style='background: url("plcbr.jpg"); width: 7px; height: 33px; float: right;'>
+                        </div>
+                        <!--	<div id='pbh' style="background:url(plcb.jpg);width:580px;height:33px;position:absolute;"></div>-->
+                        <div id="pb" style="margin: 2px 0px 0px 10px; height: 26px; position: relative;">
+                            <div id="pc">
+                                <div style="margin: 0px;">
+                                    <a title="Pantalla completa" class="p0" id="xp0" onclick="ocx.Fullscreen(true)" href="javascript:;"></a>
+                                </div>
+                                <div style="margin: 0px 0px 0px 5px;">
+                                    <a title="Una imagen" class="p1" id="xp1" onclick="ocx.ChangeShowWndNum(1,true,0,0)" href="javascript:;">
+                                    </a>
+                                </div>
+                                <div style="margin: 0px 0px 0px 5px;">
+                                    <a title="Cuatro imgenes" class="p2" id="xp2" style="display: none;" onclick="ocx.ChangeShowWndNum(4,true,0,0)" href="javascript:;">
+                                    </a>
+                                </div>
+                                <div style="margin: 0px 0px 0px 5px;">
+                                    <a title="9 view" class="p3" id="xp3" style="display: none;" onclick="ocx.ChangeShowWndNum(9,true,0,0)" href="javascript:;">
+                                    </a>
+                                </div>
+                                <div style="margin: 0px 0px 0px 5px;">
+                                    <a title="Dieciséis imagenes" class="p4" id="xp4" style="display: none;" onclick="ocx.ChangeShowWndNum(16,true,0,0)" href="javascript:;">
+                                    </a>
+                                </div>
+                                <div style="margin: 0px 0px 0px 5px;">
+                                    <a title="Split25" class="p5" id="xp5" style="display: none;" onclick="ocx.ChangeShowWndNum(25,true,0,0)" href="javascript:;">
+                                    </a>
+                                </div>
+                                <div style="margin: 0px 0px 0px 5px;">
+                                    <a title="36 view" class="p6" id="xp6" style="display: none;" onclick="ocx.ChangeShowWndNum(36,true,0,0)" href="javascript:;">
+                                    </a>
+                                </div>
+                                <div style="margin: 0px 0px 0px 5px;">
+                                    <a class="p11" id="xp7" style="display: none;" onclick="ocx.ChangeShowWndNum(64,true,0,0)" href="javascript:;">
+                                    </a>
+                                </div>
+                                <div style="margin: 0px 0px 0px 5px;">
+                                    <a title="Play All Channels" class="p7" id="startPlayAll" onclick="startPlayAll()" href="javascript:;"></a>
+                                </div>
+                                <div style="margin: 0px 0px 0px 5px;">
+                                    <a title="Close all channels" class="p72" id="stopPlayAll" onclick="StopPlayAll()" href="javascript:;"></a>
+                                </div>
+                                <div style="margin: 0px 0px 0px 5px;">
+                                    <a title="Grabar imagen" class="p8" id="snap" onclick='ocx.BMPCapturePicture("C:\\BMP")' href="javascript:;">
+                                    </a>
+                                </div>
+                                <div style="margin: 0px 0px 0px 5px;">
+                                    <a title="All channel video" class="p9" id="recordAll" onclick="recordAll()" href="javascript:;"></a>
+                                </div>
+                                <div style="margin: 0px 0px 0px 5px;">
+                                    <a title="Close All Video" class="p92" id="stopRecordAll" onclick="stopRecordAll()" href="javascript:;"></a>
+                                </div>
+								<div style="margin: 0px 17px 0px 0px; float: right;">
+                                    <a title="Audio" class="p102" id="Audio" onclick="openAudio()" href="javascript:;"></a>
+                                </div>
+								<div id="wifiGroup" style="margin: 0px 0px 0px 5px; display: none;">
+                                    <a id="wifiTip" href="javascript:;"></a>
+                                </div>
+								<div id="powerGroup" style="margin: 0px 0px 0px 5px; display: none;">
+                                    <a id="powerTip" href="javascript:;"></a>
+                                </div>
+								<div class="volume" id="Volume" style="display: none;">
+									<div id="aslider" style="margin: 0px 17px 0px 0px; float: right;">
+										<div class="sax" id="sae">
+											<div class="skx" id="ske" style="left: 0px; position: relative;">
+											</div>
+										</div>
+									</div>
+									<div id="alogo" style="margin: 0px 5px 0px 0px; float: right;">
+										<a class="p103" id="alarmAudio" href="javascript:;"></a>
+									</div>
+								</div>
+								<div class="volume" id="VolumeIn" style="display: none;">
+									<div id="Inslider" style="margin: 0px 17px 0px 0px; float: right;">
+										<div class="sax" id="saf">
+											<div class="skx" id="skf" style="left: 0px; position: relative;">
+											</div>
+										</div>
+									</div>
+									<div id="Inlogo" style="margin: 0px 5px 0px 0px; float: right;">
+										<a class="p104" id="alarmAudioIn" href="javascript:;"></a>
+									</div>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="mbc" style="padding: 0px 0px 0px 5px; width: 160px; float: left;">
+                    <div style='background: url("mb_bg.jpg"); width: 100%; overflow: hidden;'>
+                    
+                        <div id="drc" style='background: url("m_dram.jpg"); width: 100%; height: 29px; position: relative;'>
+                        <div style='background: url("logo2.gif") no-repeat; left: 0px; top: 0px; width: 100%; height: 100%; margin-top: 5px; position: absolute; z-index: 10;'></div>
+                            <div style='background: url("m_dral.jpg"); width: 8px; height: 29px; float: left;'>
+                            </div>
+                            <div style='background: url("m_drar.jpg"); margin: 0px; width: 8px; height: 29px; float: right; cursor: move;'>
+                            </div>
+                        </div>
+                        <div id="yt" style="padding: 8px 8px 0px; width: 125px; height: 130px; position: relative;">
+                            <div style="padding: 0px; width: 40px; height: 35px;">
+                                   <a class="y1" onmouseout="ocx.PTZCtrlStop(-1,4,parseInt($('ps').value))" onmousedown="ocx.PTZCtrlStart(-1,4,parseInt($('ps').value))" onmouseup="ocx.PTZCtrlStop(-1,4,parseInt($('ps').value))" href="javascript:;"></a>
+                            </div>
+                            <div style="padding: 0px; width: 45px; height: 35px;">
+                                <a class="y2" onmouseout="ocx.PTZCtrlStop(-1,0,parseInt($('ps').value))" onmousedown="ocx.PTZCtrlStart(-1,0,parseInt($('ps').value))" onmouseup="ocx.PTZCtrlStop(-1,0,parseInt($('ps').value))" href="javascript:;"></a>
+                            </div>
+                            <div style="padding: 0px; width: 39px; height: 35px;">
+                                <a class="y3" onmouseout="ocx.PTZCtrlStop(-1,6,parseInt($('ps').value))" onmousedown="ocx.PTZCtrlStart(-1,6,parseInt($('ps').value))" onmouseup="ocx.PTZCtrlStop(-1,6,parseInt($('ps').value))" href="javascript:;"></a>
+                            </div>
+                            <div style="padding: 0px; width: 40px; height: 50px;">
+                                <a class="y4" onmouseout="ocx.PTZCtrlStop(-1,2,parseInt($('ps').value))" onmousedown="ocx.PTZCtrlStart(-1,2,parseInt($('ps').value))" onmouseup="ocx.PTZCtrlStop(-1,2,parseInt($('ps').value))" href="javascript:;"></a>
+                            </div>
+                            <div style="width: 22px; height: 50px;">
+                                <a class="y5" onclick="ocx.OnBntEntermenu();" href="javascript:;"></a>
+                            </div>
+							<div style="width: 22px; height: 50px;">
+                                <a class="y10" id="menu" onclick="ocx.OnBntStart3DPos();" href="javascript:;"></a>
+                            </div>
+                            <div style="padding: 0px; width: 39px; height: 50px;">
+                                <a class="y6" onmouseout="ocx.PTZCtrlStop(-1,3,parseInt($('ps').value))" onmousedown="ocx.PTZCtrlStart(-1,3,parseInt($('ps').value))" onmouseup="ocx.PTZCtrlStop(-1,3,parseInt($('ps').value))" href="javascript:;"></a>
+                            </div>
+                            <div style="padding: 0px; width: 40px; height: 45px;">
+                                <a class="y7" onmouseout="ocx.PTZCtrlStop(-1,5,parseInt($('ps').value))" onmousedown="ocx.PTZCtrlStart(-1,5,parseInt($('ps').value))" onmouseup="ocx.PTZCtrlStop(-1,5,parseInt($('ps').value))" href="javascript:;"></a>
+                            </div>
+                            <div style="padding: 0px; width: 45px; height: 35px;">
+                                <a class="y8" onmouseout="ocx.PTZCtrlStop(-1,1,parseInt($('ps').value))" onmousedown="ocx.PTZCtrlStart(-1,1,parseInt($('ps').value))" onmouseup="ocx.PTZCtrlStop(-1,1,parseInt($('ps').value))" href="javascript:;"></a>
+                            </div>
+                            <div style="padding: 0px; width: 39px; height: 35px;">
+                                <a class="y9" onmouseout="ocx.PTZCtrlStop(-1,7,parseInt($('ps').value))" onmousedown="ocx.PTZCtrlStart(-1,7,parseInt($('ps').value))" onmouseup="ocx.PTZCtrlStop(-1,7,parseInt($('ps').value))" href="javascript:;"></a>
+                            </div>
+                        </div>
+                        <div style="padding: 0px 0px 0px 8px; width: 132px; height: 20px; overflow: hidden; position: relative;">
+                            <div class="divt" id="xbc" style="color: rgb(255, 255, 255); float: left;">Paso(1-8):</div>
+                            <div style='background: url("ytabg.jpg"); padding: 0px 0px 0px 3px; width: 53px; height: 18px; float: left;'>
+                                <input class="inputyt" id="ps" onkeyup="this.value=this.value.replace(/[^\d]/g,''); if(this.value>8)this.value=8; " onblur="this.value=this.value.replace(/[^\d]/g,''); if(this.value<1)this.value=1;" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" type="text" maxlength="1" value="5">
+                                <a class="yta1" onclick="showmu1()" href="javascript:;"></a>
+                            </div>
+                        </div>
+                        <div id="smu1" style="display: none;">
+                            <ul>
+                                <li><a onclick="onmu1(1)" href="javascript:;">1</a></li>
+                                <li><a onclick="onmu1(2)" href="javascript:;">2</a></li>
+                                <li><a onclick="onmu1(3)" href="javascript:;">3</a></li>
+                                <li><a onclick="onmu1(4)" href="javascript:;">4</a></li>
+                                <li><a onclick="onmu1(5)" href="javascript:;">5</a></li>
+                                <li><a onclick="onmu1(6)" href="javascript:;">6</a></li>
+                                <li><a onclick="onmu1(7)" href="javascript:;">7</a></li>
+                                <li><a onclick="onmu1(8)" href="javascript:;">8</a></li>
+                            </ul>
+                        </div>
+                        <div id="yt1" style="margin: 0px 5px; width: 132px; height: 90px; position: relative;">
+                            <div style="padding: 0px 0px 5px 14px;">
+                                <a class="y1" onmousedown="ocx.PTZCtrlStart(-1,9,parseInt($('ps').value))" onmouseup="ocx.PTZCtrlStop(-1,9,parseInt($('ps').value))" href="javascript:;"></a>
+                            </div>
+                            <div id="xbb" style="padding: 8px 0px 0px; width: 50px; height: 18px; text-align: center; color: rgb(255, 255, 255);">Zoom</div>
+                            <div style="padding: 0px 0px 5px;">
+                                <a class="y2" onmousedown="ocx.PTZCtrlStart(-1,8,parseInt($('ps').value))" onmouseup="ocx.PTZCtrlStop(-1,8,parseInt($('ps').value))" href="javascript:;"></a>
+                            </div>
+                            <div style="padding: 0px 0px 5px 14px;">
+                                <a class="y1" onmousedown="ocx.PTZCtrlStart(-1,11,parseInt($('ps').value))" onmouseup="ocx.PTZCtrlStop(-1,11,parseInt($('ps').value))" href="javascript:;"></a>
+                            </div>
+                            <div id="xbj" style="padding: 8px 0px 0px; width: 50px; height: 18px; text-align: center; color: rgb(255, 255, 255);">Foco</div>
+                            <div style="padding: 0px 0px 5px;">
+                                <a class="y2" onmousedown="ocx.PTZCtrlStart(-1,10,parseInt($('ps').value))" onmouseup="ocx.PTZCtrlStop(-1,10,parseInt($('ps').value))" href="javascript:;"></a>
+                            </div>
+                            <div style="padding: 0px 0px 5px 14px;">
+                                <a class="y1" onmousedown="ocx.PTZCtrlStart(-1,12,parseInt($('ps').value))" onmouseup="ocx.PTZCtrlStop(-1,12,parseInt($('ps').value))" href="javascript:;"></a>
+                            </div>
+                            <div id="xgq" style="padding: 8px 0px 0px; width: 50px; height: 18px; text-align: center; color: rgb(255, 255, 255);">Iris</div>
+                            <div style="padding: 0px 0px 5px;">
+                                <a class="y2" onmousedown="ocx.PTZCtrlStart(-1,13,parseInt($('ps').value))" onmouseup="ocx.PTZCtrlStop(-1,13,parseInt($('ps').value))" href="javascript:;"></a>
+                            </div>
+                        </div>
+                        <div id="yt2" style="padding: 0px 0px 0px 4px; height: 100%; position: relative;">
+                            <div>
+                                <!-- 预置点处理 -->
+                                <div id="ytPoint">
+                                    <div id="mbcyzd" style="margin: 0px 0px 0px 3px; padding: 0px 90px 0px 0px; color: rgb(255, 255, 255);">Preset:</div>
+                                    <div>
+                                        <input id="preSet" style="background: rgb(244, 244, 244); margin: 3px 0px 0px 5px; border: currentColor; border-image: none; width: 30px; height: 17px; color: rgb(85, 85, 85);" onkeyup="value=value.replace(/[^\d]/g,''); if (value > 255) value = 255;" maxlength="3" value="1">
+                                      </div>
+                                    <div title="Goto" id="goPreset">
+                                        <a style="width: 24px; height: 25px;" onclick="ocx.PTZCtrlGotoPreset(-1,parseInt($('preSet').value))" href="javascript:;">
+                                        </a>
+                                    </div>
+                                    <div title="Agregar Preset" id="addPreset">
+                                        <a style="width: 24px; height: 25px;" onclick="ocx.PTZCtrlSetPreset(-1,parseInt($('preSet').value),true)" href="javascript:;">
+                                        </a>
+                                    </div>
+                                    <div title="Eliminar Preset" id="delPreset">
+                                        <a style="width: 24px; height: 25px;" onclick="ocx.PTZCtrlSetPreset(-1,parseInt($('preSet').value),false)" href="javascript:;">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <!-- 轮询处理 -->
+                                <div id="ytCruise">
+                                    <div id="mbcdjxh" style="margin: 0px 10px 0px 3px; padding: 0px 90px 0px 0px; color: rgb(255, 255, 255);">Cruzero:</div>
+                                    <div>
+                                        <input id="cruise" style="background: rgb(244, 244, 244); margin: 2px 0px 3px 5px; border: currentColor; border-image: none; width: 30px; height: 17px; color: rgb(85, 85, 85);" onkeyup="value=value.replace(/[^\d]/g,''); if (value > 255) value = 255;" maxlength="3" value="1">
+                                    </div>
+                                     <div title="Empezar" id="goCruise">
+                                        <a style="width: 24px; height: 25px;" onclick="ocx.PTZCtrlTour(-1,parseInt($('cruise').value),true)" href="javascript:;">
+                                        </a>
+                                    </div>
+                                    <div title="Parar" id="stopCruise">
+                                        <a style="width: 24px; height: 25px;" onclick="ocx.PTZCtrlTour(-1,parseInt($('cruise').value),false)" href="javascript:;">
+                                        </a>
+                                    </div>
+                                    <div title="Edit" id="editCruise">
+                                        <a style="width: 24px; height: 25px;" onclick="ocx.PTZEditTure(parseInt($('cruise').value))" href="javascript:;">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="taba" style="margin: 0px; width: 160px; float: left;">
+                        <div style="width: 50%; float: left;">
+                            <a class="t1" id="taba1" href="javascript:;">Color de la Imagen</a></div>
+                        <div style="width: 50%; float: left;">
+                            <a class="t3" id="taba2" href="javascript:;">Otros ajustes</a></div>
+                    </div>
+                    <div class="mpad2" style="background: rgb(69, 81, 95); float: left;">
+                        <!--<div id='yt3' style=" height:287px;position:relative; overflow:hidden; margin:0 0 0 4px;">-->
+                        <div id="yt3" style="margin: 0px 0px 0px 4px; height: 542px; overflow: hidden; position: relative;">
+                            <div id="yt3t1" style="height: 100%;">
+                                <div id="yt3t1a">
+                                    <div style="margin: 5px 0px 0px;">
+                                        <div title="Iluminación" id="xtld" style='background: url("tx1.jpg"); width: 21px; height: 21px;'>
+                                        </div>
+                                        <div style="margin: 4px 0px 0px 4px;">
+                                            <a class="sal" onclick="gslda.set(gca-1)" href="javascript:;"></a>
+                                            
+                                        </div>
+                                        <div class="sax" id="saa">
+                                            <div title="64" class="skx" id="ska" style="left: 29.5px; position: relative;">
+                                            </div>
+                                        </div>
+                                        <div style="margin: 4px 0px 0px 4px;">
+                                            <a class="sar" onclick="gslda.set(gca+1)" href="javascript:;"></a>
+                                        </div>
+                                    </div>
+                                    <div style="margin: 5px 0px 0px;">
+                                        <div title="Contraste" id="xtdbd" style='background: url("tx2.jpg"); width: 21px; height: 21px;'>
+                                        </div>
+                                        <div style="margin: 4px 0px 0px 4px;">
+                                            <a class="sal" onclick="gsldb.set(gcb-1)" href="javascript:;"></a>
+                                        </div>
+                                        <div class="sax" id="sab">
+                                            <div title="64" class="skx" id="skb" style="left: 29.5px; position: relative;">
+                                            </div>
+                                        </div>
+                                        <div style="margin: 4px 0px 0px 4px;">
+                                            <a class="sar" onclick="gsldb.set(gcb+1)" href="javascript:;"></a>
+                                        </div>
+                                    </div>
+                                    <div style="margin: 5px 0px 0px;">
+                                        <div title="Saturación" id="xtbhd" style='background: url("tx3.jpg"); width: 21px; height: 21px;'>
+                                        </div>
+                                        <div style="margin: 4px 0px 0px 4px;">
+                                            <a class="sal" onclick="gsldc.set(gcc-1)" href="javascript:;"></a>
+                                        </div>
+                                        <div class="sax" id="sac">
+                                            <div title="64" class="skx" id="skc" style="left: 29.5px; position: relative;">
+                                            </div>
+                                        </div>
+                                        <div style="margin: 4px 0px 0px 4px;">
+                                            <a class="sar" onclick="gsldc.set(gcc+1)" href="javascript:;"></a>
+                                        </div>
+                                    </div>
+                                    <div style="margin: 5px 0px 0px;">
+                                        <div title="Matiz" id="xtsd" style='background: url("tx4.jpg"); width: 21px; height: 21px;'>
+                                        </div>
+                                        <div style="margin: 4px 0px 0px 4px;">
+                                            <a class="sal" onclick="gsldd.set(gcd-1)" href="javascript:;"></a>
+                                        </div>
+                                        <div class="sax" id="sad">
+                                            <div title="64" class="skx" id="skd" style="left: 29.5px; position: relative;">
+                                            </div>
+                                        </div>
+                                        <div style="margin: 4px 0px 0px 4px;">
+                                            <a class="sar" onclick="gsldd.set(gcd+1)" href="javascript:;"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="padding: 5px 0px 0px;">
+                                    <a class="cbt" id="xcz" onclick="txreset(64);" href="javascript:;">Restaurar</a></div>
+                            </div>
+                            <div id="yt3t2" style="height: 100%; display: none;">
+                                <div class="cbtd">
+                                    <a title="" class="cbt" id="xcqsb" style="margin: 20px 0px 0px;" onclick="ocx.RebootServer();" href="javascript:;">Reiniciar</a></div>
+                                           <div class="cbtd">
+                                <a title="" class="cbt" id="DVRcolor" style="margin: 20px 0px 0px;" onclick="ocx.EditDVRColor(-1);" href="javascript:;">color de Imagen</a></div>
+                                    <div class="cbtd">
+                                <a title="" class="cbt" id="ratio" style="margin: 20px 0px 0px;" onclick="ChangeRadio();" href="javascript:;">proporción</a></div>
+                                    <div class="cbtd">
+                                    <a title="" class="cbt" id="PlayAudio" style="margin: 20px 0px 0px; display: none;" onclick="ocx.PlayAudio(-1);" href="javascript:;">Reproducción de música</a></div>
+                                    
+                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+ 	    <div id="QS" style="left: 1790px; top: 480px; height: 300px; display: none; position: fixed;">
+				 <div id="QQ"><div title="Serial ID" id="QSLogo" style='background: url("c:/1.bmp") no-repeat left bottom; width: 120px; height: 120px; text-align: center;'></div><div id="QSText1" style="text-align: center;"><span id="QSText" style="color: rgb(0, 0, 0);">Serial ID</span></div><div title="APP" id="QSLogo2" style='background: url("c:/2.bmp") no-repeat left bottom; width: 120px; height: 120px; text-align: center;'></div><div id="QSText2" style="text-align: center;"><span id="QSText21" style="color: rgb(0, 0, 0);">APP</span></div><div title="IOS" id="QSLogo3" style='background: url("c:/3.bmp") no-repeat left bottom; width: 120px; height: 120px; text-align: center; display: none;'></div><div id="QSText3" style="text-align: center; display: none;"><span style="color: rgb(0, 0, 0);">IOS</span></div><div title="" id="QSLogo4" style='background: url("c:/4.bmp") no-repeat left bottom; width: 120px; height: 120px; text-align: center; display: none;'></div><div id="QSText4" style="text-align: center; display: none;"><span id="QSText42" style="color: rgb(0, 0, 0);"></span></div></div>
+				 <a id="QSC" style="border: 0px currentColor; border-image: none; height: 15px; color: rgb(0, 0, 0); text-decoration: none;" href="javascript:Close()">Cerrado</a>
+	    </div>
+      <div id="mc" style="width: 1920px;"> CopyRight <script> document.write(year);</script>2023,All Rights Reserved</div>
+      </div>
+    </div>
+   
+
+</body></html>

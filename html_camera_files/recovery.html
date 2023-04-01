@@ -1,0 +1,519 @@
+<html lang="en"><head>
+    <script type="text/javascript" src="m.jsp"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="renderer" content="webkit">
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+            }
+    
+            html, body {
+                font: 14px/1.5 "Microsoft YaHei", Arail, sans-serif;
+                width: 100%;
+            }
+    
+            .main {
+                width: 500px;
+                height: auto;
+                margin: auto;
+                margin-top: 100px;
+            }
+    
+            .main th {
+                height: 60px;
+                line-height: 60px;
+                font-size: 18px;
+            }
+    
+            .main tr {
+                width: 100%;
+            }
+    
+            .main tr td {
+                padding-bottom: 20px;;
+            }
+    
+            .main tr td:first-child {
+                text-align: right;
+            }
+    
+            .main tr td:last-child {
+                padding-left: 20px;
+                text-align: left;
+            }
+    
+            .main tr td input[type="text"],
+            .main tr td input[type="password"] {
+                width: 80%;
+                height: 30px;
+                line-height: 30px;
+                border: 1px solid #cdcdcd;
+                padding-left: 10px;
+            }
+    
+            .main tr td input[type="submit"] {
+                padding: 0 20px;
+                border: 1px solid #cdcdcd;
+                text-align: center;
+                line-height: 30px;
+                }
+                
+             .main tr td input[type="button"] {
+                padding: 0 20px;
+                margin:0px 0px 0px 0px;
+                border: 1px solid #cdcdcd;
+                text-align: center;
+                line-height: 30px;	
+            }
+        </style>
+    </head>
+    <body>
+        <form name="validateForm" onsubmit="return validate_required()" method="post" id="userLogin" action="result.html?cLanguage=null">
+            <table class="main" id="lmm">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th style="text-align: left"><span id="psw" style="margin-left: 90px; ">Retrieve Password</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td id="verifytype">verifytype </td>
+                    <td>
+                        <select id="selyz" onchange="changeyzfs()">
+                            <option id="op1" value="1">Safe Question</option>
+                            <!-- option id="op2" value="2">Safe Email</option -->
+                        </select>
+                    </td>
+                </tr>
+                <tr class="mbwt">
+                    <td id="qu1" width="100px">Question1: </td>
+                    <td><span id="question1">Please select a question </span>
+                    <input id="question_inp_1" name="Unlockquestion1" type="hidden" value="Please select a question "></td>
+                </tr>
+                <tr class="mbwt">
+                    <td id="answer1">Answer: </td>
+                    <td><input id="Unlockanswer1" type="password" name="Unlockanswer1"></td>
+                </tr>
+                <tr class="mbwt">
+                    <td id="qu2" width="100px">Question2: </td>
+                    <td><span id="question2">Please select a question </span>
+                    <input id="question_inp_2" name="Unlockquestion2" type="hidden" value="Please select a question "></td>
+                </tr>
+                <tr class="mbwt">
+                    <td id="answer2">Answer: </td>
+                    <td><input id="Unlockanswer2" type="password" name="Unlockanswer2"></td>
+                </tr>
+                <tr id="send-yx" style="display: none;">
+                   <td id="email" width="100px">email：</td>
+                   <td><span id="emailcount"></span>
+                </td></tr>
+                <tr id="send-yzm" style="display: none;">   
+                    <td id="emailcode">Verification Code：</td>
+                    <td><input id="yzm" type="text" placeholder="Please enter the verification code" style="width: 40%;" name="EmailCode">&nbsp;&nbsp;<input id="yzmbtn" type="button" value="点击获取验证码"></td>
+                </tr>
+                <tr>
+                    <td id="new1">NewPassword: </td>
+                    <td><input onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" id="password" type="password" name="password" maxlength="16"></td>
+                </tr>
+    
+                <tr>
+                    <td id="new2">Confirm: </td>
+                    <td><input id="confirpassword" type="password" name="confirpassword" maxlength="16" onkeyup="confirm()">
+                        <br>
+                    <span id="tips">I'm sorry, password can't be empty</span></td>
+                </tr>
+                
+                <tr>
+                <td></td>
+                    <td>
+                        <input id="submit" type="submit" value="Submit" disabled="">&nbsp;&nbsp;<input id="btn" type="button" name="btn" value="Back" onclick="history.go(-1)"> 
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        <input id="yz_type" name="changeType" type="hidden" value="AnswerRequest">
+                    </td>
+                </tr>
+            
+                </tbody>
+            </table>
+        </form>
+    
+    <script type="text/javascript">
+    var md5_key = "00754122";
+        if(!document.getElementsByClassName){ 
+                document.getElementsByClassName = function(className, element){ 
+                    var children = (element || document).getElementsByTagName('*'); 
+                    var elements = new Array(); 
+                    for (var i=0; i<children.length; i++){ 
+                        var child = children[i]; 
+                        var classNames = child.className.split(' '); 
+                            for (var j=0; j<classNames.length; j++){ 
+                                if (classNames[j] == className){ 
+                                    elements.push(child); 
+                                    break; 
+                                } 
+                            } 
+                    } 
+                return elements; 
+                }; 
+            }
+        function changeyzfs()
+        {		
+            confirm();	//更新密码状态
+    
+            var sel = document.getElementById("selyz");
+            var s = sel.value;
+            var mbwts = document.getElementsByClassName("mbwt",document.tbody); //class
+            var yzm_yx = document.getElementById("send-yx");   //tr
+            var yzm = document.getElementById("send-yzm");  //tr
+            var yzmin = document.getElementById("yzm");     //input
+            var yz_type=document.getElementById("yz_type"); //input
+            var ques1 = document.getElementById("question_inp_1");
+            var ques2 = document.getElementById("question_inp_2");
+            var answ1 = document.getElementById("Unlockanswer1");
+            var answ2 = document.getElementById("Unlockanswer2");
+            var flag = '';
+            
+            //2018-09-18 删除不支持的找回密码功能选项
+            /*if (showquesflag == 0)
+            {
+                var child = document.getElementById("op1");
+                sel.removeChild(child);
+            }*/
+            if (showemailflag == 0)
+            {
+                //var child = document.getElementById("op2");
+                //sel.removeChild(child);
+            }
+            
+            if (showquesflag != 0 && showemailflag != 0)
+            {
+                if(s=="1") //选择密保问题
+                {   
+                    if(showquesflag==0)
+                    {
+                        //alert(Password.notsupportques);
+                        //sel.value=2;
+                    }
+    
+                    else if(showquesflag==1)
+                    {     
+                        yz_type.setAttribute("value","AnswerRequest");
+                        for (i=0;i<mbwts.length;i++)
+                        {
+                            mbwts[i].style.display='';
+                        }
+                        yzm.style.display='none';
+                        yzm_yx.style.display='none';
+                        yzmin.removeAttribute("name");
+                        ques1.setAttribute("name","Unlockquestion1");
+                        ques2.setAttribute("name","Unlockquestion2");
+                        answ1.setAttribute("name","Unlockanswer1");
+                        answ2.setAttribute("name","Unlockanswer2");    
+                    }
+                    else if (showquesflag==2) 
+                    {
+                        //alert(Password.notsetques);
+                        sel.value=2;
+                    }
+    
+                }
+                else if (s=="2") //选择邮箱验证
+                {
+    
+                    if(showemailflag==0)
+                    {
+                        //alert(Password.notsupportemail);
+                        sel.value=1;
+                    }
+                    else if(showemailflag==1)
+                    {
+                        yz_type.setAttribute("value","EmailRequest");
+                        for (i=mbwts.length-1;i>=0;--i)
+                        {
+                            mbwts[i].style.display='none';
+                        }
+                        ques1.removeAttribute('name');
+                        ques2.removeAttribute('name');
+                        answ1.removeAttribute('name');
+                        answ2.removeAttribute('name');
+                        yzm_yx.style.display='';
+                        yzm.style.display='';
+                        yzmin.setAttribute("name","EmailCode");
+                    }
+                    else if(showemailflag==2)
+                    {
+                        //alert(Password.notsetemail);
+                        sel.value=1;
+                    }
+                    
+                }
+            }
+        }
+    </script>
+    
+    <script type="text/javascript">
+        /**
+         * [validate_required 提交前，验证邮箱和验证码是否正确]
+         * @return {[bool]}
+         */
+        function validate_required()	
+        {
+            var yzm=document.getElementById("selyz");
+            var s = yzm.options[yzm.options.selectedIndex].value;
+            if(s=="2")
+            {
+                var x=document.forms["validateForm"]["EmailCode"].value;
+                if(x=="")
+                {
+                    alert("请输入验证码");
+                    return false;
+                }
+                else
+                    return true;  
+            }
+            if(s=="1")
+            {
+                return true;
+            }
+        }
+    </script>
+    
+    <script type="text/javascript">
+        function monitor(obj)
+        {
+            var LocalDelay = getLocalDelay();
+            var tiemLine = parseInt((new Date().getTime()-LocalDelay.time) / 1000);
+            if(tiemLine>LocalDelay.delay)
+            {
+                console.log("过期");
+            }
+            else
+            {
+                _delay = LocalDelay.delay - tiemLine;
+                obj.setAttribute("disabled","disabled");
+                var timer = setInterval(function()
+                {
+                    if(_delay>1)
+                    {
+                        _delay--;
+                        obj.value = _delay+"s";
+                        setLocalDelay(_delay);
+                    }
+                    else
+                    {
+                        clearInterval(timer);
+                        obj.disabled = false;
+                        obj.value = Password.yzmbtn;  
+                    }
+                },1000);
+    
+            }
+        };
+    
+    
+        function countDown(obj,callback)
+        {
+            if(obj.value == Password.yzmbtn)
+            {
+                var _delay = 60;
+                var delay = _delay;
+                obj.setAttribute("disabled","disabled");
+                var timer = setInterval(function()
+                {
+                    if(delay>1)
+                    {
+                        delay--;
+                        obj.value = delay+"s";
+                        setLocalDelay(delay);
+                    }
+                    else
+                    {
+                        clearInterval(timer);
+                        obj.removeAttribute('disabled');
+                        obj.value = Password.yzmbtn;  
+                    }
+                },1000);
+                callback();
+            }
+            else
+            {
+                return false;
+            }
+        }
+    
+        function setLocalDelay(delay)
+        {
+            localStorage.setItem("delay_"+location.href, delay);
+            localStorage.setItem("time_"+location.href, new Date().getTime());
+        }
+    
+        function getLocalDelay()
+        {
+            var LocalDelay = {};
+            LocalDelay.delay = localStorage.getItem("delay_"+location.href);
+            LocalDelay.time = localStorage.getItem("time_"+location.href);
+            return LocalDelay;
+        }
+    </script>
+    
+    <script type="text/javascript">
+        window.onload = function()
+        {
+            var obj = document.getElementById("selyz");
+            obj.value=1;
+            if(showquesflag==2)   //设置验证方式的初始状态
+            {
+                obj.value=2;
+            }
+           
+            changeyzfs();
+           
+            var yzmbtn = document.getElementById("yzmbtn");
+            //注释验证码发送按钮初始化
+            monitor(yzmbtn);
+            yzmbtn.onclick = function()
+            {
+                countDown(this,getEmailCode);
+            }
+    
+        };
+        /**
+         * [getEmailCode 获取验证码，发送post请求]
+         * 
+         */
+         var emailCodeResult="CodeResult";
+        function getEmailCode()  
+        {
+            var xmlhttp;
+            /*
+            if(window.XMLHttpRequest)
+            {
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }*/
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            xmlhttp.onreadystatechange=function()
+            {
+                if(xmlhttp.readyState==4&&xmlhttp.status==200)
+                {
+                    //预留数据交互接口
+                }
+            }
+            xmlhttp.open("POST","reminder.html",true);
+            xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            xmlhttp.send("GetVerifyCode=GetVerifyCode");
+        }
+    </script>
+    <script>
+        //获取url中的参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);    //匹配目标参数
+            if (r != null) return unescape(r[2]); return null;      //返回参数值
+        }
+        document.getElementById("submit").disabled = true;
+        var language=getUrlParam('cLanguage');
+        if(language=="SimpChinese")
+        {
+            //alert(userla);
+            document.write("<script src='SimpChinese.js'><\/script>");
+        }
+        else
+        {
+            document.write("<script src='"+language+".js'><\/script>");
+        }
+        
+    
+        //var a1="问题111";
+        //var a2="问题222";
+    var showquesflag=2;
+    var showemailflag=3;
+    var emailcount="";
+    var Question1="Please select a question ";
+    var Question2="Please select a question ";
+    
+        var emlcount = document.getElementById("emailcount");              //邮箱账号显示文本域
+        var ques1 = document.getElementById("question1");                  //问题1显示文本域
+        var question_inp_1 = document.getElementById("question_inp_1");    //问题1输入框
+        var ques2 = document.getElementById("question2");
+        var question_inp_2 = document.getElementById("question_inp_2");
+    
+        emlcount.innerText=emailcount;
+        ques1.innerText=Question1;
+        question_inp_1.setAttribute("value",Question1);
+        ques2.innerText=Question2;
+        question_inp_2.setAttribute("value",Question2);
+        
+        function confirm(){
+            var password = "";
+            var confirpassword = "";
+    
+            var password=document.getElementById("password");
+            var confirpassword=document.getElementById("confirpassword");
+    
+            var _tips="success";
+            document.getElementById("submit").disabled = true;
+            var language=getUrlParam('cLanguage');
+            if ("" == password.value)
+            {
+                 if (language=="SimpChinese") 
+                   {
+                        _tips="对不起，密码不能为空";	
+                   }
+                   else 
+                _tips="I'm sorry, password can't be empty";	
+                document.getElementById("submit").disabled = true;
+            }
+            else if(password.value != confirpassword.value)
+            {
+                   if (language=="SimpChinese") 
+                   {
+                        _tips="对不起，前后两次密码不一致";	
+                   }
+                   else 
+                _tips="I'm sorry, enter the password twice";			
+                document.getElementById("submit").disabled = true;
+            
+            }
+            else
+            {	   if (language=="SimpChinese") 
+                    {
+                        _tips="输入正确，前后两次密码一致";	
+                   }
+                   else 
+                        _tips="The password is consistent";
+                document.getElementById("submit").disabled = false;
+            }
+            document.getElementById("tips").innerHTML=_tips;
+            document.getElementById("userLogin").action="result.html?cLanguage="+language;
+        }
+    </script><script src="null.js"></script>
+    <script type="text/javascript">
+        $("psw").setText(Password.findpsw);
+        $("verifytype").setText(Password.verifytype);
+        $("op1").setText(Password.op1);
+        //$("op2").setText(Password.op2);
+        $("qu1").setText(Password.question1);
+        $("answer1").setText(Password.answer);
+        $("qu2").setText(Password.question2);
+        $("answer2").setText(Password.answer);
+        $("email").setText(Password.email);
+        $("emailcode").setText(Password.emailcode);
+        $("yzm").placeholder=Password.enteryzm;
+        $("new1").setText(Password.newpassword);
+        $("new2").placeholder=Password.enterpassword;
+        $("new2").setText(Password.confirmpassword);
+        $("yzmbtn").value=Password.yzmbtn;
+        $("submit").value=Password.ok;
+        $("btn").value=Password.back;
+    </script>
+    </body></html>
