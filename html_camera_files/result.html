@@ -1,0 +1,107 @@
+<html lang="en"><head>
+<script type="text/javascript" src="m.jsp"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html, body {
+            font: 14px/1.5 "Microsoft YaHei", Arail, sans-serif;
+            width: 100%;
+        }
+
+        .main {
+            width: 400px;
+            height: auto;
+            margin: auto;
+            margin-top: 100px;
+        }
+
+        .main th {
+            height: 60px;
+            line-height: 60px;
+            font-size: 18px;
+        }
+
+        .main tr {
+            width: 100%;
+        }
+
+        .main tr td {
+            padding-bottom: 20px;;
+        }
+
+        .main tr td:first-child {
+            text-align: left;
+        }
+
+        .main tr td:last-child {
+            padding-left: 20px;
+            text-align: left;
+        }
+		.main input {
+            padding: 5px 8px;        
+        }
+		
+		
+        }
+    </style>
+</head>
+<body>
+<form action="result1.html" method="post" id="userLogin">
+    <table class="main">
+        <tbody>
+        <tr>
+            <!--td width="100px">问题（1）：</td-->
+            <td><span id="result">Wrong answer,please enter the correct answer</span>
+            <input id="result_inp_1" name="UnlockResult" type="hidden" value="Wrong answer,please enter the correct answer"></td>
+        </tr>
+		
+		<tr>
+		<td>
+		<input id="btn" type="button" name="btn" value="Back" onclick="history.go(-2)"> 
+		</td>
+		</tr>
+		</tbody>
+    </table>
+</form>
+
+<script>
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]); return null; //返回参数值
+    }
+    var language=getUrlParam('cLanguage');
+	//var userla=(navigator.browserLanguage||navigator.userLanguage||navigator.language).toLowerCase();
+	if(language=="SimpChinese")
+	{
+		$("btn").setAttribute("value","返回");
+	}
+	else
+	{
+		$("btn").setAttribute("value","Back");
+	}
+    //var a1="修改成功";
+var Result="Wrong answer,please enter the correct answer";
+    var res1 = document.getElementById("result");
+    var question_inp_1 = document.getElementById("result_inp_1");
+    res1.innerText=Result;
+    if(language=="SimpChinese")
+	{
+       if(Result=="Set Password Success")
+       result_inp_1.setAttribute("value","设置成功");
+       else
+       result_inp_1.setAttribute("value","设置失败");
+	}
+	else
+	{
+		result_inp_1.setAttribute("value",Result);
+	}
+</script>
+</body></html>
