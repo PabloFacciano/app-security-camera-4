@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+<meta http-equiv="expires" content="0">	
+<link rel="stylesheet" href="style/base.css" type="text/css" />
+<link rel="stylesheet" href="style/main.css" type="text/css" />
+<script language="JavaScript1.2" src="/hy-cgi/user.cgi?cmd=checkuserinfo&ck_password=0" type="text/javascript"></script>
+<script src="js/public.js"></script>
+<script src="js/language.js"></script>
+<script type="text/javascript">
+function on_load() {
+    var menuid = GetQueryString("id");
+    var vtype = GetQueryString("playtype");
+    if (vtype == "iv")
+    {
+        if (menuid == 3) {
+            ChangeFrame("config.html", 3);
+        }
+        else if (menuid == 2) {
+            ChangeFrame("playback.html", 2);
+        }
+        else if (menuid == 1) {
+            ChangeFrame("preview.html", 1);
+        }
+        else {
+            ChangeFrame("config.html", 3);
+        }
+    }
+    else
+    {
+        if (menuid == 3) {
+            ChangeFrame("config_flash.html", 3);
+        }
+        else if (menuid == 2) {
+            ChangeFrame("playback_flash.html", 2);
+        }
+        else if (menuid == 1) {
+            ChangeFrame("flashview.html", 1);
+        }
+        else {
+            ChangeFrame("config_flash.html", 3);
+        }
+    }
+    ChangeMenu(menuid);
+
+	if((navigator.platform != "Mac68K")&&(navigator.platform != "MacPPC")&&(navigator.platform != "Macintosh")&&(navigator.platform!="MacIntel"))
+	{
+		if ((navigator.appVersion.indexOf("iPod")!=-1) || (navigator.appVersion.indexOf("iPhone")!=-1))
+		{
+			document.getElementById("iMenu2").style.display = "none";
+		}
+		else
+		{
+			document.getElementById("iMenu2").style.display = "";
+		}
+	}
+	else
+	{
+		document.getElementById("iMenu2").style.display = "none";
+	}
+	document.getElementById("goindex").title=nav05;
+}
+
+function GetQueryString(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
+</script>
+</head>
+<body onload="on_load();">
+   <!-- <div id="header" class="header">
+	    <span style="display:none" class="help"></span> 
+        <span class="logo"></span>
+        <span class="devicetype" id="devicetype"></span>
+	    <div id="SoftwareEdition" class="edtioncolumn">	
+            <div class="edition"></div>	
+            <div class="edition"></div>	
+        </div>
+    </div>  -->
+    <div id="nav" class="nav">
+        <span class="menu" id="iMenu0">
+            <img id="logoimg" style="margin-top:15px;margin-bottom:28px;margin-left:-5px;*margin-top:0px;" src="images/logo.png" />
+        </span>
+		<span class="menu menubg" id="iMenu1" onclick="ChangeFrame('preview.html',1)">
+            <script>document.write(nav01);</script>
+        </span>
+        <span class="menu menubg" id="iMenu2" onclick="ChangeFrame('playback.html',2)">
+            <script>document.write(nav02);</script>
+        </span>
+        <span class="menu menubg" id="iMenu3" onclick="ChangeFrame('config.html',3)">
+            <script>document.write(nav03);</script>
+        </span>
+		<span class="menu" id="iMenu4" style="text-align:center; width:150px;" onclick="javascript:window.location.href='index.html'">
+            <img id="goindex" style="margin-top:15px;margin-bottom:20px;" src="images/index.png" />
+        </span>
+	    <!--<span class="logout" onclick="javascript:window.close();" style="display:none">
+            <script>document.write(btn39);</script>
+        </span>
+	    <span class="logoutimg" onclick="" style="display:none">&nbsp;</span>	
+	    <span class="riser" style="display:none">
+	        <label>admin&nbsp;|&nbsp;</label>
+	    </span>	
+	    <span class="loginuser">
+	        <label id="curruser"></label>
+	    </span>-->
+        <span class="loginuserimg" style="display:none">&nbsp;</span>
+    </div>	
+    <div id="content" class="content"></div>
+    <div class="footer"><!----></div>
+    <div id="ConfigDivUpdateBlock" class="updateblock"></div>
+    <div id="dvStringLenTest" class="stringLengthTest"></div>
+    <div id="dvErrorTips" class="errortips"></div>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript">
+	    var vtypes;
+function ChangeFrame(src, index)
+{
+    vtypes = GetQueryString("playtype");
+    if (index == 3)
+    {
+        if (vtypes == "iv") {
+            src = "config.html";
+	    }
+	    else {
+            src = "config_flash.html";
+	    }
+    }
+    if (index == 2) {
+        if (vtypes == "iv") {
+            src = "playback.html";
+        }
+        else {
+            src = "playback_flash.html";
+        }
+    }
+
+    if (index == 1) {
+        if (vtypes == "iv") {
+            src = "preview.html";
+        }
+        else {
+            src = "flashview.html";
+        }
+    }
+    
+    $("#content").html('<iframe frameborder="0" scrolling="no" id="contentframe" height="460px" name="contentframe" class="contentframe" src="' + src + '"></iframe>');
+    $("#contentframe").attr("src", src);
+    $("#iMenu" + index).addClass("menuBackground");
+    ChangeMenu(index);
+}
+
+function ChangeMenu(index) {
+	for (var i = 1; i < 4; i++) {
+		if ($("#iMenu" + i).hasClass("menuBackground")) {
+			$("#iMenu" + i).removeClass("menuBackground");
+		}
+	}
+	$("#iMenu" + index).addClass("menuBackground");
+}
+</script>
+</body>
+</html>

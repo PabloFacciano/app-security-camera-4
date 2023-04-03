@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+<meta http-equiv="expires" content="0">	
+<title></title>
+<link rel="stylesheet" href="style/preview.css" type="text/css" />
+<script language="JavaScript1.2" src="/hy-cgi/av.cgi?cmd=getvideoattr" type="text/javascript"></script>
+<script language="JavaScript1.2" src="/hy-cgi/device.cgi?cmd=getlandevices" type="text/javascript"></script>
+<script language="JavaScript1.2" src="/hy-cgi/ptz.cgi?cmd=preset&act=query" type="text/javascript"></script>
+<script language="JavaScript1.2" src="/hy-cgi/net.cgi?cmd=getrtspport&cmd=getrtspauth" type="text/javascript"></script>
+<script language="JavaScript1.2" src="/hy-cgi/user.cgi?cmd=checkuserinfo" type="text/javascript"></script>
+<script src="js/public.js"></script>
+<script src="js/language.js"></script>
+<script src="js/preview.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function addEvent(obj, name, func)
+{
+	if (window.addEventListener) {
+		if(navigator.userAgent.indexOf("Firefox")>0 || navigator.userAgent.indexOf("Chrome") !== -1)
+		{
+			obj.addEventListener(name, func, false); 
+	    } 
+		else if(navigator.userAgent.indexOf("Safari")>0 || navigator.userAgent.indexOf("Camino") !== -1)
+		{
+			obj.addEventListener(name, func, false); 
+	    }
+	    else
+	    {
+			obj.attachEvent("on"+name, func);
+			//obj.addEventListener(name, func, false); 
+		}
+	} else {
+		//obj.addEventListener(name, func, false); 
+		obj.attachEvent("on"+name, func);
+	}
+}
+//-->
+</SCRIPT>
+<style type="text/css">
+<!--
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+.cs{
+	CURSOR: pointer;
+}
+.cs3 {
+	COLOR: #17659e; FONT-SIZE: 16px; CURSOR: pointer
+}
+-->
+</style></head>
+<body onLoad="winload();">
+<div id="container">
+  <div id="top">
+  	<div align="left" style=" padding-top:8px; line-height:22px;"><img id="playimg" style="margin-left:30px;" src="images/stop.png" onClick="switchimg('play');" /><img id="audioimg" style="margin-left:30px;" src="images/audio.png" onClick="switchimg('audio');" /><img id="micimg" style="margin-left:30px;" src="images/mic.png" onClick="switchimg('mic');" /><img id="snapimg" style="margin-left:30px;" src="images/snap.png" onMouseDown="ptz_onmousedown(6)" onMouseUp="ptz_onmouseup(6)" /><img src="images/record.png" style="margin-left:30px;" name="recordimg" id="recordimg" onClick="switchimg('record');" /><img src="images/x1.png" style="margin-left:30px;" name="zoomimg" id="zoomimg" onClick="switchimg('zoom');" /><img src="images/x1.gif" style="margin-left:30px;" id="winviewimg" onClick="switchimg('winview');" /><img src="images/alarmstatus.png" style="margin-left:30px;display:none;" name="showalarmimg" id="showalarmimg" onClick="switchimg('showalarm');" /><img id="ctrlpanelimg" src="images/ctrlpanel.png" onClick="switchimg('ctrlpanel');" style="margin-left:380px;" /><img id="str11img" style="margin-left:30px;" src="images/1_over.png" onClick="switchimg('str11');" /><img id="str12img" style="margin-left:30px;" src="images/2.png" onClick="switchimg('str12');" /><img id="str13img" style="margin-left:30px; visibility:hidden;" src="images/3.png" onClick="switchimg('str13');" /></div>
+  </div>
+  <div id="playpage">
+		<div id="video" align="center">
+			<div id="x1" style="border:2px solid #000000;width:366px;height:251px;margin-top:-1px;margin-left:-370px;"><script type="text/javascript">
+				if ((navigator.appVersion.indexOf("iPod")!=-1) || (navigator.appVersion.indexOf("iPhone")!=-1))
+				{
+					
+				}
+				else if (navigator.appName.indexOf("Microsoft Internet Explorer") != -1)
+				{
+					document.open();
+					document.write('<object id="player1" type="application/x-hyplayer" width="100%" height="100%" align="center" valign="middle" border="0">');
+					document.write('<p align="left" style="margin-top:100px;margin-left:50px;font-size:14px;color:#FFFFFF;">');
+					document.write('&nbsp;&nbsp;&nbsp;&nbsp;<span id="t5">' + str_noins0 + '</span><br><br>');
+					document.write(' <span id="t6">' + str_noins1 + '<br><br>' + str_noins2 + '<br><br>' + str_noins3 + '</span><a href="download/HYPlayer.exe" id="t7">' + str_noins4 + '</a><span id="t8">' + str_noins5 + '</span>');
+					document.write('</p>');
+					document.write('</object>');
+					document.close();
+				}
+				else
+				{
+					document.open();
+					document.write('<object id="player1" type="application/x-hyplayer" width="100%" height="100%" align="center" valign="middle" border="0">');
+					document.write('<p align="left" style="font-size:14px;">');
+					document.write('&nbsp;&nbsp;&nbsp;&nbsp;<span id="t5">' + str_noins0 + '</span><br><br>');
+					document.write(' <span id="t6">' + str_noins1 + '<br><br>' + str_noins2 + '<br><br>' + str_noins3 + '</span><a href="download/HYPlayer.exe" id="t7">' + str_noins4 + '</a><span id="t8">' + str_noins5 + '</span>');
+					document.write('</p>');
+					document.write('</object>');
+					document.close();
+				}
+			</script></div>
+			<div id="x2" style="border:2px solid #000000;width:366px;height:251px;margin-left:370px;margin-top:-255px;">
+			<script type="text/javascript">
+				if ((navigator.appVersion.indexOf("iPod")!=-1) || (navigator.appVersion.indexOf("iPhone")!=-1))
+				{
+					
+				}
+				else if (navigator.appName.indexOf("Microsoft Internet Explorer") != -1)
+				{
+					document.open();
+					document.write('<object id="player2" type="application/x-hyplayer" width="100%" height="100%" align="center" valign="middle" border="0">');
+					document.write('</object>');
+					document.close();
+				}
+				else
+				{
+					document.open();
+					document.write('<object id="player2" type="application/x-hyplayer" width="100%" height="100%" align="center" valign="middle" border="0">');
+					document.write('</object>');
+					document.close();
+				}
+			</script></div>
+			<div id="x3" style="border:2px solid #000000;width:366px;height:251px;margin-top:1px;margin-left:-370px;"><script type="text/javascript">
+				if ((navigator.appVersion.indexOf("iPod")!=-1) || (navigator.appVersion.indexOf("iPhone")!=-1))
+				{
+					
+				}
+				else if (navigator.appName.indexOf("Microsoft Internet Explorer") != -1)
+				{
+					document.open();
+					document.write('<object id="player3" type="application/x-hyplayer" width="100%" height="100%" align="center" valign="middle" border="0">');
+					document.write('</object>');
+					document.close();
+				}
+				else
+				{
+					document.open();
+					document.write('<object id="player3" type="application/x-hyplayer" width="100%" height="100%" align="center" valign="middle" border="0">');
+					document.write('</object>');
+					document.close();
+				}
+			</script></div>
+			<div id="x4" style="border:2px solid #000000;width:366px;height:251px;margin-left:370px;margin-top:-255px;"><script type="text/javascript">
+				if ((navigator.appVersion.indexOf("iPod")!=-1) || (navigator.appVersion.indexOf("iPhone")!=-1))
+				{
+					
+				}
+				else if (navigator.appName.indexOf("Microsoft Internet Explorer") != -1)
+				{
+					document.open();
+					document.write('<object id="player4" type="application/x-hyplayer" width="100%" height="100%" align="center" valign="middle" border="0">');
+					document.write('</object>');
+					document.close();
+				}
+				else
+				{
+					document.open();
+					document.write('<object id="player4" type="application/x-hyplayer" width="100%" height="100%" align="center" valign="middle" border="0">');
+					document.write('</object>');
+					document.close();
+				}
+			</script></div>
+		</div>
+  </div>
+  <div id="ctrl">
+    <div style="margin-top:18px; text-align:center; visibility:hidden;">
+		<img src="images/x1_over.gif" id="win1img" onClick="switchimg('win1');" />
+		<img src="images/x4.gif" style="margin-left:20px;" id="win4img" onClick="switchimg('win4');" />
+	</div>
+	<div align="center" style="margin-top:15px;">
+		<table width="160" height="160" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+			  <td width="50" height="51"></td>
+			  <td width="60" height="51" align="center"><img src="images/up.png" id="up" onMouseDown="ptz_onmousedown(3)" onMouseUp="ptz_onmouseup(3)" /></td>
+			  <td></td>
+			</tr>
+			<tr>
+			  <td width="50" height="61" align="center"><img src="images/left.png" name="left" id="left" onMouseDown="ptz_onmousedown(1)" onMouseUp="ptz_onmouseup(1)" /></td>
+			  <td width="60" height="61" align="center"><img id="homeimg" src="images/center.png" onClick="switchimg('home');" /></td>
+			  <td width="50" height="61" align="center"><img src="images/right.png" name="right" id="right" onMouseDown="ptz_onmousedown(2)" onMouseUp="ptz_onmouseup(2)" /></td>
+			</tr>
+			<tr>
+			  <td width="50" height="48"></td>
+			  <td width="60" height="48" align="center"><img src="images/down.png" id="down" onMouseDown="ptz_onmousedown(4)" onMouseUp="ptz_onmouseup(4)" /></td>
+			  <td width="50" height="48"></td>
+			</tr>
+		</table>
+	</div>
+	<div align="center" style="margin-top:15px;">
+		<img id="hscanimg" style="margin-left:2px;" src="images/hscan.png" onClick="switchimg('hscan');" /><img id="vscanimg" style="margin-left:15px;" src="images/vscan.png" onClick="switchimg('vscan');" /><img id="hvstopimg" style="margin-left:15px;" src="images/hvstop.png" onClick="switchimg('hvstop');" /><img id="tourimg" style="margin-left:15px;display:none;" src="images/tour.png" onClick="switchimg('tour');" />
+	</div>
+	<div align="center" style="margin-top:15px;display:none;">
+		<div><img id="zoominimg" src="images/zoomin.png" onClick="switchimg('zoomin');" /><img id="zoomoutimg" style="margin-left:65px;" src="images/zoomout.png" onClick="switchimg('zoomout');" /></div>
+		<div style="margin-top:10px;"><img id="focusinimg" src="images/fout.png" onClick="switchimg('focusin');" /><img id="focusoutimg" style="margin-left:65px;" src="images/fin.png" onClick="switchimg('focusout');" /></div>
+	</div>
+	<div style="margin-top:60px;font-size:12px;">
+		<div>
+			<button type="button" style="margin-left:10px;width:160px;" onClick="showppos('cp','btncallpos')"><script>document.write(btn32);</script></button><br>
+			<button type="button" style="margin-top:23px;margin-left:10px;width:160px;" onClick="showppos('sp','btnsetpos')"><script>document.write(btn33);</script></button>
+		</div>
+		<div>&nbsp;</div>
+	</div>
+  </div>
+</div>
+<div style="Z-INDEX: 10000; DISPLAY: none; POSITION: absolute; WIDTH: 160px; HEIGHT: 104px; TOP: 405px; LEFT: 765px" id="cp">
+  <table border="1" cellSpacing="0" cellPadding="0" bgColor="#c6c5c5" style="border-collapse: collapse;border-left-style:none; border-top-style:none;">
+  	<tr>
+      <td colspan="3" style="border-left-style:none; border-top-style:none;" onMouseOut="SetCpBackColor(this, 0);" onMouseOver="SetCpBackColor(this, 1);" width="30">&nbsp;&nbsp;</td>
+      <td bgcolor="#c6c5c5" width="40"><div align="center"><span class="cs3" onClick="hideppos('cp')">&nbsp;X&nbsp;</span></div></td>
+    </tr>
+    <tr>
+      <td  onMouseOut="SetCpBackColor(this, 0);" onMouseOver="SetCpBackColor(this, 1);" width="40"><div align="center"><span class="cs3" onClick="set_preset(1)">&nbsp;1&nbsp;</span></div></td>
+      <td onMouseOut="SetCpBackColor(this, 0);" onMouseOver="SetCpBackColor(this, 1);" width="40"><div align="center"><span class="cs3" onClick="set_preset(2)">&nbsp;2&nbsp;</span></div></td>
+	   <td onMouseOut="SetCpBackColor(this, 0);" onMouseOver="SetCpBackColor(this, 1);" width="40"><div align="center"><span class="cs3" onClick="set_preset(3)">&nbsp;3&nbsp;</span></div></td>
+      <td onMouseOut="SetCpBackColor(this, 0);" onMouseOver="SetCpBackColor(this, 1);" width="40"><div align="center"><span class="cs3" onClick="set_preset(4)">&nbsp;4&nbsp;</span></div></td>
+    </tr>
+	<tr>
+	  <td onMouseOut="SetCpBackColor(this, 0);" onMouseOver="SetCpBackColor(this, 1);"><div align="center"><span class="cs3" onClick="set_preset(5)">&nbsp;5&nbsp;</span></div></td>
+      <td onMouseOut="SetCpBackColor(this, 0);" onMouseOver="SetCpBackColor(this, 1);"><div align="center"><span class="cs3" onClick="set_preset(6)">&nbsp;6&nbsp;</span></div></td>
+      <td onMouseOut="SetCpBackColor(this, 0);" onMouseOver="SetCpBackColor(this, 1);"><div align="center"><span class="cs3" onClick="set_preset(7)">&nbsp;7&nbsp;</span></div></td>
+      <td onMouseOut="SetCpBackColor(this, 0);" onMouseOver="SetCpBackColor(this, 1);"><div align="center"><span class="cs3" onClick="set_preset(8)">&nbsp;8</span></div></td>
+    </tr>
+  </table>
+</div>
+<div style="Z-INDEX: 10000; DISPLAY: none; POSITION: absolute; WIDTH: 160px; HEIGHT: 104px; TOP: 452px; LEFT: 765px" id="sp">
+<table border="1" cellSpacing="0" cellPadding="0" bgColor="#c6c5c5" style="border-collapse: collapse;border-left-style:none; border-top-style:none;">
+  <tr>
+      <td colspan="3" style="border-left-style:none; border-top-style:none;" onMouseOut="SetCpBackColor(this, 0);" onMouseOver="SetCpBackColor(this, 1);" width="30">&nbsp;&nbsp;</td>
+      <td bgcolor="#c6c5c5" width="40"><div align="center"><span class="cs3" onClick="hideppos('sp')">&nbsp;X&nbsp;</span></div></td>
+    </tr>
+  <tr>
+      <td  onMouseOut="SetCpBackColor(this, 0);" onMouseOver="SetCpBackColor(this, 1);" width="40"><div id="gopreset1" align="center"><span class="cs3" onClick="go_preset(1)">&nbsp;1&nbsp;</span></div></td>
+      <td onMouseOut="SetCpBackColor(this, 0);" onMouseOver="SetCpBackColor(this, 1);" width="40"><div id="gopreset2" align="center"><span class="cs3" onClick="go_preset(2)">&nbsp;2&nbsp;</span></div></td>
+	   <td onMouseOut="SetCpBackColor(this, 0);" onMouseOver="SetCpBackColor(this, 1);" width="40"><div id="gopreset3" align="center"><span class="cs3" onClick="go_preset(3)">&nbsp;3&nbsp;</span></div></td>
+      <td onMouseOut="SetCpBackColor(this, 0);" onMouseOver="SetCpBackColor(this, 1);" width="40"><div id="gopreset4" align="center"><span class="cs3" onClick="go_preset(4)">&nbsp;4&nbsp;</span></div></td>
+    </tr>
+	<tr>
+	   <td onMouseOut="SetCpBackColor(this, 0);" onMouseOver="SetCpBackColor(this, 1);"><div id="gopreset5" align="center"><span class="cs3" onClick="go_preset(5)">&nbsp;5&nbsp;</span></div></td>
+      <td onMouseOut="SetCpBackColor(this, 0);" onMouseOver="SetCpBackColor(this, 1);"><div id="gopreset6" align="center"><span class="cs3" onClick="go_preset(6)">&nbsp;6&nbsp;</span></div></td>
+      <td onMouseOut="SetCpBackColor(this, 0);" onMouseOver="SetCpBackColor(this, 1);"><div id="gopreset7" align="center"><span class="cs3" onClick="go_preset(7)">&nbsp;7&nbsp;</span></div></td>
+      <td onMouseOut="SetCpBackColor(this, 0);" onMouseOver="SetCpBackColor(this, 1);"><div id="gopreset8" align="center"><span class="cs3" onClick="go_preset(8)">&nbsp;8</span></div></td>
+    </tr>
+  </table>
+</div>
+<form name="rescgi" method="post" target="res">
+</form>
+<iframe width="100" height="100" name="res" style="display:none"></iframe>
+</body>
+</html>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+addEvent(player1,"EventMouseDown",MouseDown);
+addEvent(player2,"EventMouseDown",MouseDown);
+addEvent(player3,"EventMouseDown",MouseDown);
+addEvent(player4,"EventMouseDown",MouseDown);
+
+function MouseDown(num)
+{
+	if(num==1)
+	{
+		CID = "player1";
+		var ssrcwin=document.getElementById("winviewimg").src.replace(locate,'');
+		var imgsrcwin=ssrcwin.substr(ssrcwin.lastIndexOf('\/') + 1);
+		if(imgsrcwin=="x1.gif")
+		{
+			document.getElementById("x1").style.borderColor="";
+		}
+		else
+		{
+			document.getElementById("x1").style.borderColor="yellow";
+		}
+		document.getElementById("x2").style.borderColor="";
+		document.getElementById("x3").style.borderColor="";
+		document.getElementById("x4").style.borderColor="";
+		//document.getElementById("x2").border="0px";
+
+        var ssrcwins = document.getElementById("winviewimg").src.replace(locate, '');
+        var imgsrcwins = ssrcwins.substr(ssrcwins.lastIndexOf('\/') + 1);
+        if (imgsrcwins == "x4.gif") 
+        {
+            document.getElementById('player2').StopPlayerSpeaker();
+            document.getElementById('player3').StopPlayerSpeaker();
+            document.getElementById('player4').StopPlayerSpeaker();
+            document.getElementById('player2').MuteFlag = true;
+	        document.getElementById('player3').MuteFlag = true;
+	        document.getElementById('player4').MuteFlag = true;
+        }
+        
+        if(document.getElementById('player1').MuteFlag)
+        {
+            document.getElementById("audioimg").src="images/audio.png";
+        }
+        else
+        {
+            document.getElementById("audioimg").src="images/audio_over.png";
+        }
+	}
+	else if(num==2)
+	{
+		CID = "player2";
+		
+		document.getElementById("x1").style.borderColor="";
+		document.getElementById("x2").style.border="2px solid yellow";
+		document.getElementById("x3").style.borderColor="";
+		document.getElementById("x4").style.borderColor="";
+        document.getElementById('player1').StopPlayerSpeaker();
+        document.getElementById('player3').StopPlayerSpeaker();
+        document.getElementById('player4').StopPlayerSpeaker();
+        document.getElementById('player1').MuteFlag = true;
+	    document.getElementById('player3').MuteFlag = true;
+	    document.getElementById('player4').MuteFlag = true;
+        
+        if(document.getElementById('player2').MuteFlag)
+        {
+            document.getElementById("audioimg").src="images/audio.png";
+        }
+        else
+        {
+            document.getElementById("audioimg").src="images/audio_over.png";
+        }
+	}
+	else if(num==3)
+	{
+		CID = "player3";
+		document.getElementById("x1").style.borderColor="";
+		document.getElementById("x2").style.borderColor="";
+		document.getElementById("x3").style.border="2px solid yellow";
+		document.getElementById("x4").style.borderColor="";
+        document.getElementById('player2').StopPlayerSpeaker();
+        document.getElementById('player1').StopPlayerSpeaker();
+        document.getElementById('player4').StopPlayerSpeaker();
+        document.getElementById('player2').MuteFlag = true;
+	    document.getElementById('player1').MuteFlag = true;
+	    document.getElementById('player4').MuteFlag = true;
+        
+        if(document.getElementById('player3').MuteFlag)
+        {
+            document.getElementById("audioimg").src="images/audio.png";
+        }
+        else
+        {
+            document.getElementById("audioimg").src="images/audio_over.png";
+        }
+	}
+	else if(num==4)
+	{
+		CID = "player4";
+		document.getElementById("x1").style.borderColor="";
+		document.getElementById("x2").style.borderColor="";
+		document.getElementById("x3").style.borderColor="";
+		document.getElementById("x4").style.border="2px solid yellow";
+        document.getElementById('player2').StopPlayerSpeaker();
+        document.getElementById('player3').StopPlayerSpeaker();
+        document.getElementById('player1').StopPlayerSpeaker();
+        document.getElementById('player2').MuteFlag = true;
+	    document.getElementById('player3').MuteFlag = true;
+	    document.getElementById('player1').MuteFlag = true;
+        
+        if(document.getElementById('player4').MuteFlag)
+        {
+            document.getElementById("audioimg").src="images/audio.png";
+        }
+        else
+        {
+            document.getElementById("audioimg").src="images/audio_over.png";
+        }
+	}
+	   
+	document.getElementById("micimg").src="images/mic.png";
+	document.getElementById("recordimg").src="images/record.png";
+	document.getElementById("playimg").src="images/stop.png";
+}
+
+function LeftPtz()
+{
+	ptzcmdSubmit('left');
+}
+function RightPtz()
+{
+	ptzcmdSubmit("right");
+}
+function TopPtz()
+{
+	ptzcmdSubmit("up");
+}
+function BottomPtz()
+{
+	ptzcmdSubmit("down");
+}
+function StopPtz()
+{
+	ptzcmdSubmit("stop");
+}
+
+//-->
+</SCRIPT>
