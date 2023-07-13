@@ -1,0 +1,63 @@
+body {
+	width: 100%; height: 100%;
+}
+.header {
+	margin: 0px auto; width: 974px; height: 64px; position: relative;
+}
+.logo {
+	background: url("../images/logo.png") no-repeat; width: 162px; height: 32px; margin-top: 25px; margin-left: 10px; float: inherit;
+}
+.devicetype {
+	margin: 26px 0px 0px 20px; width: 300px; height: 27px; color: rgb(150, 68, 68); line-height: 27px; font-size: 20px; display: inline-block;
+}
+.help {
+	background: url("../images/help.gif") no-repeat left; margin: 29px 5px 0px 0px; height: 25px; line-height: 25px; padding-left: 30px; float: right; cursor: pointer; _margin: 31px 5px 0 0;
+}
+.edtioncolumn {
+	background: rgb(255, 255, 255); border: 1px solid rgb(149, 149, 149); border-image: none; top: 50px; width: 135px; height: 50px; right: 10px; display: none; position: absolute;
+}
+.edition {
+	height: 25px; color: rgb(117, 117, 117); line-height: 25px; padding-left: 10px;
+}
+.nav {
+	background: url("../images/nav_bg.png"); margin: 0px auto; width: 974px; height: 79px; color: rgb(102, 102, 102);
+}
+.menu {
+	width: 205px; height: 79px; text-align: center; line-height: 98px; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold; border-left-color: rgb(223, 223, 223); border-left-width: 0px; border-left-style: solid; float: left; cursor: pointer;
+}
+.menubg {
+	background: url("../images/menu_bg.png"); float: left;
+}
+.riser {
+	text-align: center; line-height: 79px; padding-right: 5px; float: right;
+}
+.logout {
+	text-align: center; line-height: 41px; padding-right: 12px; float: right; cursor: pointer;
+}
+.logoutimg {
+	background: url("../images/logout.gif") no-repeat 0% 50%; width: 20px; height: 41px; margin-right: 5px; float: right; cursor: pointer;
+}
+.loginuser {
+	text-align: right; line-height: 41px; overflow: hidden; padding-right: 5px; float: right; white-space: nowrap; -ms-text-overflow: ellipsis; max-width: 165px;
+}
+.loginuserimg {
+	background: url("../images/user.gif") no-repeat 0% 50%; width: 20px; height: 41px; margin-right: 5px; float: right;
+}
+.menuBackground {
+	background: url("../images/menu_bg_over.png"); color: rgb(167, 55, 55);
+}
+.content {
+	margin: 5px auto 0px; border: 1px solid rgb(177, 177, 177); border-image: none; width: 974px; position: relative;
+}
+.contentframe {
+	margin: 18px; width: 938px; height: 560px;
+}
+.footer {
+	height: 30px; text-align: center; line-height: 30px;
+}
+.updateblock {
+	left: 0px; top: 0px; display: none; position: fixed; z-index: 10000; opacity: 0.6; background-color: rgb(52, 52, 52);
+}
+.stringLengthTest {
+	left: 0px; top: 0px; display: none; position: absolute; z-index: 10000;
+}

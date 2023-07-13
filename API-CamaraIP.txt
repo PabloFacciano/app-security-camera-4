@@ -1,0 +1,49 @@
+Camara
+
+IP de la camara
+http://192.168.0.89/
+
+--------------
+
+URLs
+/hy-cgi/av.cgi?cmd=getvideoattr
+/hy-cgi/user.cgi?cmd=checkuserinfo
+/main.html?id=1&playtype=iv
+/preview.html
+
+--------------
+
+RSTP
+/hy-cgi/net.cgi?cmd=getrtspport&cmd=getrtspauth
+
+/mac/live/ch0?username:password
+http://192.168.0.89/mac/live/ch0?admin:123456
+
+rtsp://username:password@ip:80/live/ch0
+rtsp://admin:123456@192.168.0.89:80/live/ch0
+
+---------------
+
+Control API
+/hy-cgi/ptz.cgi?cmd=ptzctrl&act=left
+/hy-cgi/ptz.cgi?cmd=ptzctrl&act=right
+/hy-cgi/ptz.cgi?cmd=ptzctrl&act=up
+/hy-cgi/ptz.cgi?cmd=ptzctrl&act=down
+/hy-cgi/ptz.cgi?cmd=ptzctrl&act=home
+/hy-cgi/ptz.cgi?cmd=ptzctrl&act=hscan
+/hy-cgi/ptz.cgi?cmd=ptzctrl&act=vscan
+/hy-cgi/ptz.cgi?cmd=ptzctrl&act=hvstop
+/hy-cgi/ptz.cgi?cmd=ptzctrl&act=tour
+/hy-cgi/ptz.cgi?cmd=ptzctrl&act=stop
+
+Zoom API
+/hy-cgi/ptz.cgi?cmd=zoomctrl&act=zoomin
+/hy-cgi/ptz.cgi?cmd=zoomctrl&act=zoomout
+/hy-cgi/ptz.cgi?cmd=zoomctrl&act=focusin
+/hy-cgi/ptz.cgi?cmd=zoomctrl&act=focusout
+
+Preset API
+/hy-cgi/ptz.cgi?cmd=preset&act=set&status=1&number=
+/hy-cgi/ptz.cgi?cmd=preset&act=set&status=0&number=
+/hy-cgi/ptz.cgi?cmd=preset&act=goto&number=
+/hy-cgi/ptz.cgi?cmd=preset&act=tour
